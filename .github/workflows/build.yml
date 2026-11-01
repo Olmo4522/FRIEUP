@@ -10,45 +10,6 @@ defaults:
     working-directory: FireUp-projekt
 jobs:
   build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
-      - uses: android-actions/setup-android@v3
-      - uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '8.7'
-      - name: Build
-        env:
-          VERSION_CODE: ${{ github.run_number }}
-        run: gradle assembleRelease --no-daemon
-      - name: Rename
-        run: cp app/build/outputs/apk/release/app-release.apk FireUp.apk
-      - uses: actions/upload-artifact@v4
-        with:
-          name: FireUp-apk
-          path: FireUp-projekt/FireUp.apk
-      - name: Publish release
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          TAG="v1.0.${{ github.run_number }}"
-          gh release create "$TAG" FireUp.apk --title "FireUp $TAG" --notes "Stiahni FireUp.apk a nainštaluj do telefónu." --latest
-name: Build APK
-on:
-  push:
-    branches: [main]
-  workflow_dispatch:
-permissions:
-  contents: write
-defaults:
-  run:
-    working-directory: FireUp-projekt
-jobs:
-  build:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -81,4 +42,3 @@ jobs:
         run: |
           TAG="v1.0.${{ github.run_number }}"
           gh release create "$TAG" FireUp.apk --title "FireUp $TAG" --notes "Stiahni FireUp.apk a nainštaluj do telefónu." --latest
-          
