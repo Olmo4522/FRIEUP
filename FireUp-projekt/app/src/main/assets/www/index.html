@@ -868,9 +868,9 @@ function fxLoop(){fx.clearRect(0,0,innerWidth,innerHeight);PT=PT.filter(p=>p.lif
     if(p.sq){fx.save();fx.translate(p.x,p.y);fx.rotate(p.rot);fx.fillRect(-p.r,-p.r*.5,p.r*2,p.r);fx.restore()}else{fx.beginPath();fx.arc(p.x,p.y,p.r,0,6.283);fx.fill()}}
   fx.globalAlpha=1;fx.shadowBlur=0;if(PT.length)requestAnimationFrame(fxLoop);else{fxOn=false;fx.clearRect(0,0,innerWidth,innerHeight)}}
 window.__back=function(){if($("#layer").innerHTML.trim()){closeLayer();return true}if(view!=="today"){view="today";ENTER=true;render();return true}return false};
-S=lsGet()||seed();S.quests=S.quests||[];S.ts=S.ts||{};if(!S.lv)S.lv=levelOf(totalXP()).L;
+window.SFX=SFX;window.closeLayer=closeLayer;S=lsGet()||seed();S.quests=S.quests||[];S.ts=S.ts||{};if(!S.lv)S.lv=levelOf(totalXP()).L;
 render();connect();
 document.addEventListener("visibilitychange",()=>{if(!document.hidden){const t=key(new Date());if(view==="today")render()}});
 })();
 </script>
-</body></html>
+<script src="extra.js"></script></body></html>
