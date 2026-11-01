@@ -1,0 +1,25 @@
+plugins { id 'com.android.application' }
+android {
+    namespace 'sk.fireup.app'
+    compileSdk 34
+    defaultConfig {
+        applicationId 'sk.fireup.app'
+        minSdk 26
+        targetSdk 34
+        versionCode Integer.parseInt(System.getenv('VERSION_CODE') ?: '1')
+        versionName "1.0." + (System.getenv('VERSION_CODE') ?: '1')
+    }
+    signingConfigs {
+        fixed {
+            storeFile file('fireup.keystore')
+            storePassword 'fireup123'
+            keyAlias 'fireup'
+            keyPassword 'fireup123'
+        }
+    }
+    buildTypes {
+        release { minifyEnabled false; signingConfig signingConfigs.fixed }
+        debug { signingConfig signingConfigs.fixed }
+    }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+}
