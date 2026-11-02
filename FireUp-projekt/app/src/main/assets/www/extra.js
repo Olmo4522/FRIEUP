@@ -1,7 +1,7 @@
 /* FireUp Android: prístup len pre povolený účet + kontrola aktualizácií */
 (function () {
   "use strict";
-  var ALLOWED = "d49eee7c5c5a31f951dd0670f8d1427229ef2527063f47762bc404d5299a38bf";
+  var ALLOWED = ["d49eee7c5c5a31f951dd0670f8d1427229ef2527063f47762bc404d5299a38bf", "03939395fcb899d193dacc6e2e37ef57e495052c41b6865350b04502e7280067"];
   var REPO = "Olmo4522/FRIEUP";
   var KEY = "fireup_auth";
   var params = new URLSearchParams(location.search);
@@ -72,7 +72,7 @@
       var p1 = gate.querySelector("#gPin").value, p2 = gate.querySelector("#gPin2").value;
       if (!email) return shake("Zadaj email.");
       sha(email).then(function (h) {
-        if (h !== ALLOWED) return shake("Tento email nemá prístup do FireUp.");
+        if (ALLOWED.indexOf(h) < 0) return shake("Tento email nemá prístup do FireUp.");
         if (!/^\d{4,6}$/.test(p1)) return shake("PIN musí mať 4 až 6 číslic.");
         if (p1 !== p2) return shake("PIN-y sa nezhodujú.");
         var salt = Math.random().toString(36).slice(2);
@@ -113,7 +113,7 @@
       ev.preventDefault(); tap();
       var email = gate.querySelector("#gEmailR").value.trim().toLowerCase(), p = gate.querySelector("#gPinR").value;
       sha(email).then(function (h) {
-        if (h !== ALLOWED) return shake("Tento email nemá prístup do FireUp.");
+        if (ALLOWED.indexOf(h) < 0) return shake("Tento email nemá prístup do FireUp.");
         if (!/^\d{4,6}$/.test(p)) return shake("PIN musí mať 4 až 6 číslic.");
         var salt = Math.random().toString(36).slice(2);
         sha(salt + p).then(function (ph) { setAuth({ e: h, s: salt, p: ph, len: p.length }); open(); });
@@ -162,5 +162,5 @@
   };
 
   var a = getAuth();
-  if (a && a.e === ALLOWED && a.p) { if (!a.len) a.len = 0; showLogin(a); } else showRegister();
+  if (a && ALLOWED.indexOf(a.e) >= 0 && a.p) { if (!a.len) a.len = 0; showLogin(a); } else showRegister();
 })();
