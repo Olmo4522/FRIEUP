@@ -199,6 +199,49 @@ body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
 .ach:not(.won) .badge{opacity:.6}
 .icons{grid-template-columns:repeat(8,1fr)}
 .seg.seg4{grid-template-columns:repeat(4,1fr)}
+.seg.seg2{grid-template-columns:1fr 1fr}
+.newsbox{width:min(400px,calc(100% - 32px));max-height:calc(100% - 40px);overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:20px 20px 18px;border-radius:26px;background:rgba(14,18,14,.96);border:1px solid rgba(62,224,90,.35);box-shadow:0 0 60px -12px var(--glow);animation:pop .5s cubic-bezier(.2,1.4,.4,1)}
+.nwhead{display:flex;align-items:center;justify-content:space-between}
+.nwfl{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:radial-gradient(circle at 50% 70%,rgba(62,224,90,.35),rgba(62,224,90,.05) 70%);border:1px solid rgba(62,224,90,.3)}
+.nwfl svg.fl{width:44px;height:44px}
+.nwlang{display:flex;padding:3px;border-radius:12px;background:var(--glass-2);border:1px solid var(--edge)}
+.nwlang button{min-width:40px;height:30px;border-radius:9px;font-family:var(--f-mono);font-size:12px;font-weight:700;color:var(--muted)}
+.nwlang button.on{background:var(--fg);color:var(--bg)}
+.nweb{font-family:var(--f-mono);font-size:11px;letter-spacing:.25em;color:#b9ffc6;margin-top:4px}
+.newsbox h2{margin:0;font-family:var(--f-display);font-size:22px;line-height:1.2;text-wrap:balance}
+.nwlist{display:flex;flex-direction:column;gap:4px;margin-top:4px}
+.nwi{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--edge);animation:rise .5s cubic-bezier(.2,.9,.3,1) both}
+.nwi:first-child{border-top:0}
+.nwic{width:40px;height:40px;flex:none;border-radius:13px;display:grid;place-items:center;color:#062a10;background:linear-gradient(150deg,#b6ff7a,#3ee05a 45%,#17a63a);box-shadow:0 4px 14px -4px var(--glow)}
+.nwic svg{width:20px;height:20px}
+.nwi b{display:block;font-size:15px;margin-bottom:3px}
+.nwi p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.5}
+.nwlink{padding:10px 12px;border-radius:14px;background:var(--glass-2);border:1px solid var(--edge);display:flex;flex-direction:column;gap:4px}
+.nwlink small{font-family:var(--f-mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.nwlink a{color:var(--accent);font-family:var(--f-mono);font-size:13px;word-break:break-all;user-select:text}
+.nwlink .mini svg{width:16px;height:16px}
+.newsrow{flex-direction:row!important;align-items:center;gap:12px!important;text-align:left;cursor:pointer}
+.newsrow .nwic{width:38px;height:38px}
+.newsrow span:nth-child(2){flex:1;display:flex;flex-direction:column;gap:2px}
+.newsrow small{color:var(--muted);font-size:12px}
+.newsrow .chev{font-size:22px;color:var(--muted)}.seg button{display:inline-flex;align-items:center;justify-content:center;gap:6px}.seg button svg{width:16px;height:16px;flex:none}
+.clist{display:flex;flex-direction:column;border:1px solid var(--edge);border-radius:16px;background:var(--glass-2);overflow:hidden}
+.clist .ci{display:flex;align-items:center;gap:10px;padding:2px 4px 2px 12px;border-bottom:1px solid var(--edge);transition:background .2s}
+.clist .ci:focus-within{background:rgba(62,224,90,.07)}
+.clist .num{width:24px;height:24px;flex:none;border-radius:8px;display:grid;place-items:center;font-family:var(--f-mono);font-size:11px;font-weight:700;color:var(--accent);background:rgba(62,224,90,.12);border:1px solid rgba(62,224,90,.28)}
+.clist input{flex:1;min-width:0;height:48px;border:0;background:transparent;color:var(--fg);font:inherit;font-size:15px;padding:0 2px;outline:none}
+.clist input::placeholder{color:var(--muted);opacity:.7}
+.clist .rm{width:40px;height:40px;flex:none;border-radius:12px;display:grid;place-items:center;color:var(--muted)}
+.clist .rm svg{width:17px;height:17px}.clist .rm:hover{color:var(--warn);background:var(--warn-soft)}
+.clist .add{display:flex;align-items:center;justify-content:center;gap:8px;height:50px;color:var(--accent);font-weight:700;font-size:14px}
+.clist .add svg{width:18px;height:18px}.clist .add:hover{background:rgba(62,224,90,.08)}
+.sact{display:grid;grid-template-columns:1fr 1.6fr;gap:10px;margin-top:4px}.sact.three{grid-template-columns:auto 1fr 1.6fr}
+.sact .btn{height:52px;border-radius:16px}.sact .btn svg{width:18px;height:18px}
+.btn.icon{width:52px;padding:0}.btn.icon svg{width:20px!important;height:20px!important}
+.wpick{display:flex;align-items:center;gap:8px;padding:6px;border-radius:16px;border:1px solid rgba(62,224,90,.3);background:rgba(62,224,90,.06)}
+.wpick .wl{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px}.wpick .wl small{color:var(--muted);font-family:var(--f-mono);font-size:12px}
+.mini:disabled{opacity:.3;pointer-events:none}
+.wtag{font-family:var(--f-mono);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#4fd1ff;border:1px solid rgba(79,209,255,.4);background:rgba(79,209,255,.1);padding:1px 6px;border-radius:6px}
 /* ---- quests ---- */
 .qstrip{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:18px;text-align:left;background:linear-gradient(120deg,rgba(245,197,66,.12),rgba(62,224,90,.06)),var(--glass);border:1px solid rgba(245,197,66,.28);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
 .qstrip .qi{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:var(--gold);background:rgba(245,197,66,.14)}
@@ -483,7 +526,9 @@ async function connect(){
 }
 
 /* ---------- logic ---------- */
-const tasksOn=k=>{const d=fromKey(k);return S.tasks.filter(t=>t.days.includes(wd(d))&&t.from<=k)};
+const tasksOn=k=>{const d=fromKey(k);return S.tasks.filter(t=>t.days.includes(wd(d))&&t.from<=k&&(!t.week||monKey(k)===t.week))};
+const wkRange=mk=>{const a=fromKey(mk),b=addDays(a,6);return `${a.getDate()}.${a.getMonth()+1}. – ${b.getDate()}.${b.getMonth()+1}.`};
+const wkName=mk=>{const c=monKey(key(new Date()));if(mk===c)return"Tento týždeň";if(mk===key(addDays(fromKey(c),7)))return"Budúci týždeň";if(mk<c)return"Skončený týždeň";return"O "+Math.round((fromKey(mk)-fromKey(c))/6048e5)+" týždne"};
 function isDone(t,k){const v=(S.log[k]||{})[t.id];
   if(t.type==="single")return v===true;
   if(t.type==="count")return (v||0)>=t.goal-1e-9;
@@ -602,6 +647,7 @@ function taskCard(t,k){
   const done=isDone(t,k),v=(S.log[k]||{})[t.id],isToday=k===key(new Date());
   let sub="";
   if(t.time)sub+=`<span>${t.time}</span>`;
+  if(t.week)sub+=`<span class="wtag">1 týždeň</span>`;
   if(done)sub+=`<span class="ok">splnené</span>`;
   else if(isToday&&t.time)sub+=`<span class="pill" data-due="${t.time}"></span>`;
   let act="",extra="";
@@ -681,7 +727,8 @@ function renderProfile(){
   const lv=levelOf(totalXP());
   return `${header()}<p class="h1">Profil</p>
   <div class="card"><div class="field"><label for="pname">Tvoje meno</label><input class="inp" id="pname" value="${esc(S.name)}" placeholder="napr. Dominik" maxlength="30"></div><div class="row-between"><span>LVL ${lv.L} · ${totalXP()} XP</span><span class="sync">${syncMode}</span></div></div>
-  <div class="card"><h3>Všetky úlohy (${S.tasks.length})</h3><div class="tlist">${S.tasks.map(t=>`<button data-edit="${t.id}"><span class="ico">${ico(t.icon)}</span><span><b>${esc(t.name)}</b><small>${t.time||"bez času"} · ${t.days.length===7?"každý deň":t.days.map(i=>DN[i]).join(" ")}</small></span></button>`).join("")||'<span class="note">Žiadne úlohy.</span>'}</div><button class="btn block" data-add>Pridať úlohu</button></div>
+  <div class="card"><h3>Všetky úlohy (${S.tasks.length})</h3><div class="tlist">${S.tasks.map(t=>`<button data-edit="${t.id}"><span class="ico">${ico(t.icon)}</span><span><b>${esc(t.name)}</b><small>${t.time||"bez času"} · ${t.days.length===7?"každý deň":t.days.map(i=>DN[i]).join(" ")}${t.week?" · len "+wkRange(t.week):""}</small></span></button>`).join("")||'<span class="note">Žiadne úlohy.</span>'}</div><button class="btn block" data-add>Pridať úlohu</button></div>
+  <button class="card newsrow" data-news><span class="nwic">${svg('<path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9Z"/>',2)}</span><span><b>Čo je nové</b><small>Posledná aktualizácia FireUp</small></span><span class="chev">›</span></button>
   <div class="card"><h3>Dáta</h3><p class="note" style="text-align:left;margin:0">Zmaže všetky úlohy aj históriu, XP a sériu.</p><button class="btn danger block" data-reset>Vymazať všetko</button></div>`;
 }
 function renderTabs(){
@@ -717,6 +764,7 @@ function bind(){
     b.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}});
     b.addEventListener("contextmenu",e=>e.preventDefault());
   });
+  document.querySelectorAll("[data-news]").forEach(b=>b.onclick=()=>{SFX.open();showNews(true)});
   document.querySelectorAll("[data-qnew]").forEach(b=>b.onclick=()=>openQuestEditor(null));
   document.querySelectorAll("[data-qedit]").forEach(b=>b.onclick=()=>openQuestEditor(S.quests.find(q=>q.id===b.dataset.qedit)));
   document.querySelectorAll("[data-qstep]").forEach(b=>b.onclick=()=>{const [id,i]=b.dataset.qstep.split(":");const q=S.quests.find(x=>x.id===id);q.stepDone=q.stepDone||[];q.stepDone[+i]=!q.stepDone[+i];
@@ -736,6 +784,38 @@ function bind(){
 function toast(msg){const el=document.createElement("div");el.className="toast";el.textContent=msg;document.body.appendChild(el);setTimeout(()=>{el.classList.add("out");setTimeout(()=>el.remove(),250)},1500)}
 function closeLayer(){const sc=$("#layer .scrim");if(!sc){$("#layer").innerHTML="";return}if(sc.classList.contains("closing"))return;SFX.close();sc.classList.add("closing");setTimeout(()=>{if(sc.parentNode)$("#layer").innerHTML=""},230)}
 function xpFloat(x,y,txt){const el=document.createElement("div");el.className="xpf";el.textContent=txt;el.style.left=x+"px";el.style.top=y+"px";document.body.appendChild(el);setTimeout(()=>el.remove(),1200)}
+/* ---------- čo je nové ---------- */
+const NEWS_ID="2026-11-ios-repeat";
+const PHONE='<rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/>';
+const BRUSH='<path d="M14 4l6 6-8.5 8.5a3 3 0 0 1-4.2 0l-1.8-1.8a3 3 0 0 1 0-4.2Z"/><path d="M4 20l3-3"/>';
+const LOOP='<path d="M17 2l3 3-3 3"/><path d="M4 11V9a4 4 0 0 1 4-4h12M7 22l-3-3 3-3"/><path d="M20 13v2a4 4 0 0 1-4 4H4"/>';
+const NEWS={
+ en:{eyebrow:"UPDATE",title:"What's new in FireUp",ok:"Got it",items:[
+  {i:PHONE,t:"FireUp now works on iPhone",d:"Open the link below in Safari, tap Share → Add to Home Screen. You get the FireUp icon on your home screen and the app works offline too."},
+  {i:BRUSH,t:"Refreshed design",d:"Checklist items now sit together in one clean card. Press Enter to jump to the next item. Cancel and Add are side by side, and editing a task has a quick delete button."},
+  {i:LOOP,t:"New: repeat options",d:"Choose Every week, or Just one week. Pick the week with the arrows and select a day, e.g. Wednesday, and the task shows up only on that day. These tasks get a blue 1 WEEK tag."}],
+  link:"iPhone link"},
+ sk:{eyebrow:"AKTUALIZÁCIA",title:"Čo je nové vo FireUp",ok:"Rozumiem",items:[
+  {i:PHONE,t:"FireUp už funguje aj na iPhone",d:"Otvor odkaz nižšie v Safari, ťukni na Zdieľať → Pridať na plochu. Na ploche budeš mať ikonu FireUp a appka funguje aj bez internetu."},
+  {i:BRUSH,t:"Upravený vzhľad",d:"Položky checklistu sú teraz spolu v jednej prehľadnej karte. Enter ťa presunie na ďalšiu položku. Zrušiť a Pridať sú vedľa seba a pri úprave úlohy je rýchle tlačidlo na zmazanie."},
+  {i:LOOP,t:"Nové: opakovanie",d:"Vyber Každý týždeň alebo Len jeden týždeň. Šípkami zvolíš týždeň, klikneš napr. na stredu a úloha sa ukáže len v ten deň. Takéto úlohy majú modrý štítok 1 TÝŽDEŇ."}],
+  link:"Odkaz pre iPhone"}};
+const IOS_URL="https://olmo4522.github.io/FRIEUP/";
+function showNews(manual){
+  const L=NEWS[S.lang==="sk"?"sk":"en"];
+  $("#layer").innerHTML=`<div class="scrim lvup" id="scrim"><div class="newsbox" role="dialog" aria-modal="true" aria-labelledby="nwT">
+   <div class="nwhead"><div class="nwfl">${flameSVG(Math.max(1,S.lv||1))}</div><div class="nwlang" role="group" aria-label="Language"><button type="button" data-lg="en" class="${S.lang==="sk"?"":"on"}">EN</button><button type="button" data-lg="sk" class="${S.lang==="sk"?"on":""}">SK</button></div></div>
+   <small class="nweb">${L.eyebrow}</small><h2 id="nwT">${L.title}</h2>
+   <div class="nwlist">${L.items.map((x,i)=>`<div class="nwi" style="animation-delay:${.12+i*.09}s"><span class="nwic">${svg(x.i,2)}</span><div><b>${x.t}</b><p>${x.d}</p></div></div>`).join("")}</div>
+   <div class="nwlink"><small>${L.link}</small><div class="row-between"><a href="${IOS_URL}" target="_blank" rel="noopener">${IOS_URL.replace("https://","")}</a><button type="button" class="mini" id="nwCopy" aria-label="Copy">${svg('<rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/>',2)}</button></div></div>
+   <button class="btn block" id="nwOk">${L.ok}</button></div></div>`;
+  if(!manual)SFX.quest();
+  document.querySelectorAll("[data-lg]").forEach(b=>b.onclick=()=>{if((S.lang||"en")===b.dataset.lg)return;SFX.tap();S.lang=b.dataset.lg;save();showNews(true)});
+  $("#nwCopy").onclick=()=>{SFX.tap();const done=()=>toast(S.lang==="sk"?"Odkaz skopírovaný":"Link copied");try{navigator.clipboard.writeText(IOS_URL).then(done,()=>{})}catch(e){}};
+  $("#nwOk").onclick=()=>{SFX.tap();S.seenNews=NEWS_ID;save();closeLayer()};
+  $("#scrim").onclick=ev=>{if(ev.target.id==="scrim"){S.seenNews=NEWS_ID;save();closeLayer()}};
+}
+function maybeNews(){if(S.seenNews===NEWS_ID)return;let n=0;const t=setInterval(()=>{n++;if(n>240){clearInterval(t);return}if(document.getElementById("gate")||$("#layer").innerHTML.trim())return;clearInterval(t);setTimeout(()=>{if(!$("#layer").innerHTML.trim()&&S.seenNews!==NEWS_ID)showNews(false)},500)},500)}
 function confirmSheet(title,text,okLbl,fn){
   SFX.open();$("#layer").innerHTML=`<div class="scrim" id="scrim"><div class="sheet" role="dialog" aria-modal="true"><h2>${title}</h2><p style="margin:0;color:var(--muted);line-height:1.5">${text}</p><div class="two"><button class="btn ghost" id="cNo">Zrušiť</button><button class="btn danger" id="cOk">${okLbl}</button></div></div></div>`;
   $("#cNo").onclick=closeLayer;$("#scrim").onclick=e=>{if(e.target.id==="scrim")closeLayer()};$("#cOk").onclick=()=>{$("#layer").innerHTML="";SFX.undo();fn()};
@@ -753,10 +833,9 @@ function openQuestEditor(q){
     <div class="field"><span>Obtiažnosť</span><div class="seg seg4 diff">${Object.entries(DIFF).map(([k,v])=>`<button type="button" data-df="${k}" class="df-${k}${d.diff===k?" on":""}"><b>${v.n}</b><small>+${v.xp} XP</small></button>`).join("")}</div></div>
     <div class="field"><span>Ikona</span><div class="icons">${ICONS.map(i=>`<button type="button" class="${d.icon===i?"on":""}" data-qic="${i}" aria-label="${i}">${ico(i)}</button>`).join("")}</div></div>
     <div class="field"><label for="qDue">Termín (nepovinné)</label><input class="inp" id="qDue" type="date" value="${d.due||""}"></div>
-    <div class="field"><span>Kroky (nepovinné)</span><div class="subitems">${d.steps.map((it,i)=>`<div class="r"><input class="inp" data-qs="${i}" id="qs${i}" value="${esc(it)}" placeholder="Krok ${i+1}" maxlength="60"><button type="button" class="mini" data-qrm="${i}" aria-label="Odstrániť">×</button></div>`).join("")}<button type="button" class="btn ghost" id="qAddStep">Pridať krok</button></div></div>
+    <div class="field"><span>Kroky (nepovinné)</span><div class="clist">${d.steps.map((it,i)=>`<div class="ci"><span class="num">${i+1}</span><input data-qs="${i}" id="qs${i}" value="${esc(it)}" placeholder="Krok ${i+1}" maxlength="60" enterkeyhint="next" aria-label="Krok ${i+1}"><button type="button" class="rm" data-qrm="${i}" aria-label="Odstrániť krok ${i+1}">${svg('<path d="M6 6l12 12M18 6 6 18"/>',2)}</button></div>`).join("")}<button type="button" class="add" id="qAddStep">${svg('<path d="M12 5v14M5 12h14"/>',2.4)}Pridať krok</button></div></div>
     <p id="qErr" class="note" style="color:var(--warn);text-align:left;margin:0" hidden></p>
-    <button class="btn block" type="submit">${isNew?"Vytvoriť quest":"Uložiť zmeny"}</button>
-    <div class="two"><button type="button" class="btn ghost" id="qCancel">Zrušiť</button>${isNew?"":`<button type="button" class="btn danger" id="qDel">Zmazať</button>`}</div>
+    <div class="sact${isNew?"":" three"}">${isNew?"":`<button type="button" class="btn danger icon" id="qDel" aria-label="Zmazať quest">${svg('<path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/>',2)}</button>`}<button type="button" class="btn ghost" id="qCancel">Zrušiť</button><button class="btn" type="submit">${isNew?"Vytvoriť quest":"Uložiť zmeny"}</button></div>
     </form></div>`;
     const grab=()=>{d.name=$("#qName").value;d.due=$("#qDue").value;document.querySelectorAll("[data-qs]").forEach(x=>d.steps[+x.dataset.qs]=x.value)};
     document.querySelectorAll("[data-df],[data-qic]").forEach(b=>b.addEventListener("pointerdown",()=>SFX.tap()));
@@ -764,6 +843,7 @@ function openQuestEditor(q){
     document.querySelectorAll("[data-qic]").forEach(b=>b.onclick=()=>{grab();d.icon=b.dataset.qic;draw()});
     document.querySelectorAll("[data-qrm]").forEach(b=>b.onclick=()=>{grab();d.steps.splice(+b.dataset.qrm,1);(d.stepDone||[]).splice(+b.dataset.qrm,1);if(!d.steps.length)d.steps=[""];draw()});
     $("#qAddStep").onclick=()=>{grab();d.steps.push("");draw();const l=document.querySelectorAll("[data-qs]");l[l.length-1].focus()};
+    document.querySelectorAll("[data-qs]").forEach(x=>x.addEventListener("keydown",ev=>{if(ev.key!=="Enter")return;ev.preventDefault();grab();const i=+x.dataset.qs;d.steps.splice(i+1,0,"");if(d.stepDone)d.stepDone.splice(i+1,0,false);draw();const n=document.querySelector(`[data-qs="${i+1}"]`);if(n)n.focus()}));
     $("#qCancel").onclick=closeLayer;$("#scrim").onclick=e=>{if(e.target.id==="scrim")closeLayer()};
     const del=$("#qDel");if(del)del.onclick=()=>confirmSheet("Zmazať quest?",`Quest „${esc(d.name)}“ zmizne.`,"Zmazať",()=>{S.quests=S.quests.filter(x=>x.id!==d.id);save();render()});
     $("#qed").onsubmit=e=>{e.preventDefault();grab();const err=$("#qErr");d.name=d.name.trim();
@@ -790,12 +870,13 @@ function openEditor(t){
     <div class="two"><div class="field"><label for="eGoal">${m==="liter"?"Cieľ (litre)":m==="bottle"?"Cieľ (počet fliaš)":m==="glass"?"Cieľ (počet pohárov)":"Cieľ"}</label><input class="inp" id="eGoal" type="number" inputmode="decimal" min="0.1" step="${m==="liter"?"0.1":"1"}" value="${d.goal||8}"></div>
     ${m==="bottle"?`<div class="field"><label for="eSize">Objem fľaše (l)</label><input class="inp" id="eSize" type="number" inputmode="decimal" min="0.05" step="0.05" value="${d.size||0.5}"></div>`:m==="liter"?`<div class="field"><label for="eSize">Tlačidlo + pridá</label><select class="inp" id="eSize">${[0.1,0.25,0.33,0.5,0.75,1].map(v=>`<option value="${v}" ${(d.size||0.25)==v?"selected":""}>${fmt(v)} l</option>`).join("")}</select></div>`:m==="custom"?`<div class="field"><label for="eUnit">Názov jednotky</label><input class="inp" id="eUnit" value="${esc(d.unit||"")}" placeholder="napr. strán" maxlength="16"></div>`:""}</div>
     ${m==="bottle"?`<p class="note" style="text-align:left;margin:0">Spolu ${fmt((d.goal||0)*(d.size||0.5))} l denne.</p>`:""}`})():""}
-    ${d.type==="list"?`<div class="field"><span>Položky</span><div class="subitems">${d.items.map((it,i)=>`<div class="r"><input class="inp" id="eIt${i}" data-it="${i}" value="${esc(it)}" placeholder="Položka ${i+1}" maxlength="50"><button type="button" class="mini" data-rm="${i}" aria-label="Odstrániť">×</button></div>`).join("")}<button type="button" class="btn ghost" id="eAddIt">Pridať položku</button></div></div>`:""}
+    ${d.type==="list"?`<div class="field"><span>Položky</span><div class="clist">${d.items.map((it,i)=>`<div class="ci"><span class="num">${i+1}</span><input id="eIt${i}" data-it="${i}" value="${esc(it)}" placeholder="napr. 500 ml mlieka" maxlength="50" enterkeyhint="next" aria-label="Položka ${i+1}"><button type="button" class="rm" data-rm="${i}" aria-label="Odstrániť položku ${i+1}">${svg('<path d="M6 6l12 12M18 6 6 18"/>',2)}</button></div>`).join("")}<button type="button" class="add" id="eAddIt">${svg('<path d="M12 5v14M5 12h14"/>',2.4)}Pridať položku</button></div></div>`:""}
     <div class="field"><label for="eTime">Čas (nepovinné)</label><input class="inp" id="eTime" type="time" value="${d.time||""}"></div>
     <div class="field"><span>Dni</span><div class="dsel">${DN.map((n,i)=>`<button type="button" data-dd="${i}" class="${d.days.includes(i)?"on":""}">${n}</button>`).join("")}</div></div>
+    <div class="field"><span>Opakovanie</span><div class="seg seg2"><button type="button" data-rp="every" class="${d.week?"":"on"}">${svg('<path d="M17 2l3 3-3 3"/><path d="M4 11V9a4 4 0 0 1 4-4h12M7 22l-3-3 3-3"/><path d="M20 13v2a4 4 0 0 1-4 4H4"/>',2)}Každý týždeň</button><button type="button" data-rp="week" class="${d.week?"on":""}">${svg('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',2)}Len jeden týždeň</button></div>
+    ${d.week?`<div class="wpick"><button type="button" class="mini" data-wk="-1" aria-label="Predchádzajúci týždeň" ${d.week<=monKey(key(new Date()))?"disabled":""}>‹</button><div class="wl"><b>${wkName(d.week)}</b><small>${wkRange(d.week)}</small></div><button type="button" class="mini" data-wk="1" aria-label="Ďalší týždeň">›</button></div><p class="note" style="text-align:left;margin:0">Úloha sa zobrazí len v tomto týždni, vo vybrané dni.</p>`:""}</div>
     <p id="eErr" class="note" style="color:var(--warn);text-align:left;margin:0" hidden></p>
-    <button class="btn block" type="submit">${isNew?"Pridať úlohu":"Uložiť zmeny"}</button>
-    <div class="two"><button type="button" class="btn ghost" id="eCancel">Zrušiť</button>${isNew?"":`<button type="button" class="btn danger" id="eDel">Zmazať</button>`}</div>
+    <div class="sact${isNew?"":" three"}">${isNew?"":`<button type="button" class="btn danger icon" id="eDel" aria-label="Zmazať úlohu">${svg('<path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/>',2)}</button>`}<button type="button" class="btn ghost" id="eCancel">Zrušiť</button><button class="btn" type="submit">${isNew?`${svg('<path d="M12 5v14M5 12h14"/>',2.6)}Pridať úlohu`:"Uložiť zmeny"}</button></div>
     </form></div>`;
     const grab=()=>{d.name=$("#eName").value;d.time=$("#eTime").value;
       if($("#eGoal")){const g=parseFloat($("#eGoal").value.replace(",","."))||1;d.goal=cMode(d)==="liter"?Math.max(0.1,Math.round(g*100)/100):Math.max(1,Math.round(g))}
@@ -808,6 +889,9 @@ function openEditor(t){
     document.querySelectorAll("[data-cm]").forEach(b=>b.onclick=()=>{grab();const m=b.dataset.cm;if(m!==cMode(d)){d.mode=m;if(m==="glass"){d.goal=8}else if(m==="bottle"){d.goal=4;d.size=0.5}else if(m==="liter"){d.goal=2.5;d.size=0.25}}draw()});
     const eg=$("#eGoal"),es=$("#eSize");if(eg&&es&&cMode(d)==="bottle"){const up=()=>{grab();const n=document.querySelector(".sheet .note");if(n)n.textContent=`Spolu ${fmt(d.goal*d.size)} l denne.`};eg.oninput=up;es.oninput=up}
     document.querySelectorAll("[data-dd]").forEach(b=>b.onclick=()=>{grab();const i=+b.dataset.dd;d.days=d.days.includes(i)?d.days.filter(x=>x!==i):[...d.days,i].sort();draw()});
+    document.querySelectorAll("[data-rp]").forEach(b=>b.onclick=()=>{grab();SFX.tap();if(b.dataset.rp==="week")d.week=d.week||monKey(key(new Date()));else delete d.week;draw()});
+    document.querySelectorAll("[data-wk]").forEach(b=>b.onclick=()=>{grab();SFX.tap();const n=key(addDays(fromKey(d.week),7*(+b.dataset.wk)));if(n>=monKey(key(new Date())))d.week=n;draw()});
+    document.querySelectorAll("[data-it]").forEach(x=>x.addEventListener("keydown",ev=>{if(ev.key!=="Enter")return;ev.preventDefault();grab();const i=+x.dataset.it;d.items.splice(i+1,0,"");draw();const n=document.querySelector(`[data-it="${i+1}"]`);if(n)n.focus()}));
     document.querySelectorAll("[data-rm]").forEach(b=>b.onclick=()=>{grab();d.items.splice(+b.dataset.rm,1);if(!d.items.length)d.items=[""];draw()});
     const ai=$("#eAddIt");if(ai)ai.onclick=()=>{grab();d.items.push("");draw();const l=document.querySelectorAll("[data-it]");l[l.length-1].focus()};
     $("#eCancel").onclick=closeLayer;$("#scrim").onclick=e=>{if(e.target.id==="scrim")closeLayer()};
@@ -869,7 +953,7 @@ function fxLoop(){fx.clearRect(0,0,innerWidth,innerHeight);PT=PT.filter(p=>p.lif
   fx.globalAlpha=1;fx.shadowBlur=0;if(PT.length)requestAnimationFrame(fxLoop);else{fxOn=false;fx.clearRect(0,0,innerWidth,innerHeight)}}
 window.__back=function(){if($("#layer").innerHTML.trim()){closeLayer();return true}if(view!=="today"){view="today";ENTER=true;render();return true}return false};
 window.SFX=SFX;window.closeLayer=closeLayer;S=lsGet()||seed();S.quests=S.quests||[];S.ts=S.ts||{};if(!S.lv)S.lv=levelOf(totalXP()).L;
-render();connect();
+render();connect();maybeNews();
 document.addEventListener("visibilitychange",()=>{if(!document.hidden){const t=key(new Date());if(view==="today")render()}});
 })();
 </script>
