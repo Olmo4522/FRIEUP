@@ -200,6 +200,34 @@ body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
 .icons{grid-template-columns:repeat(8,1fr)}
 .seg.seg4{grid-template-columns:repeat(4,1fr)}
 .seg.seg2{grid-template-columns:1fr 1fr}
+.bigupd{position:relative;display:flex;align-items:center;gap:10px;padding:8px 6px 8px 8px;border-radius:16px;overflow:hidden;isolation:isolate;border:1px solid rgba(192,132,252,.45);box-shadow:0 0 24px -12px #c084fc;transition:transform .28s cubic-bezier(.5,0,.75,0),opacity .28s}
+.bigupd::before{content:"";position:absolute;inset:-60%;z-index:-2;background:conic-gradient(from 0deg,transparent 0 70%,rgba(192,132,252,.4) 80%,rgba(62,224,90,.4) 90%,transparent 100%);animation:spin 6s linear infinite;opacity:.6}
+.bigupd::after{content:"";position:absolute;inset:1px;z-index:-1;border-radius:15px;background:linear-gradient(135deg,rgba(192,132,252,.10),rgba(62,224,90,.05) 55%,rgba(79,209,255,.08)),rgba(14,16,14,.92)}
+.bigupd.going{transform:translateX(110%) scale(.6);opacity:0}
+.bigupd.back{animation:buIn .45s cubic-bezier(.2,1.3,.4,1)}
+@keyframes buIn{from{transform:translateX(60%) scale(.7);opacity:0}}
+.bu-ic{width:34px;height:34px;flex:none;border-radius:11px;display:grid;place-items:center;background:radial-gradient(circle at 50% 70%,rgba(60,255,200,.28),rgba(60,255,200,.04) 70%)}
+.bu-ic svg.fl{width:28px;height:28px}
+.bu-t{display:flex;flex-direction:column;min-width:0;flex:1}
+.bu-t b{font-family:var(--f-display);font-size:13px;letter-spacing:.06em;white-space:nowrap;background:linear-gradient(90deg,#f0abfc,#b6ff7a,#7dd3fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.bu-t em{font-style:normal;font-size:11px;color:var(--muted);white-space:nowrap}
+.bu-cd{display:flex;gap:4px;flex:none}
+.bu-cd span{display:flex;align-items:baseline;gap:1px;padding:4px 5px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid var(--edge)}
+.bu-cd b{font-family:var(--f-mono);font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--fg);display:inline-block}
+.bu-cd b.tk{animation:tk .35s ease}
+@keyframes tk{0%{transform:translateY(-3px);opacity:.4}100%{transform:none;opacity:1}}
+.bu-cd small{font-family:var(--f-mono);font-size:9px;color:var(--muted)}
+.bu-min{width:30px;height:30px;flex:none;border-radius:10px;display:grid;place-items:center;color:var(--muted)}
+.bu-min svg{width:16px;height:16px}.bu-min:hover{color:var(--fg);background:rgba(255,255,255,.06)}
+@media (max-width:360px){.bu-t em{display:none}}
+#bupill{position:fixed;z-index:25;right:0;bottom:calc(104px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:6px;padding:6px max(10px,env(safe-area-inset-right,0px)) 6px 6px;border-radius:14px 0 0 14px;
+  background:rgba(14,16,14,.94);border:1px solid rgba(192,132,252,.5);border-right:0;box-shadow:0 0 20px -8px #c084fc;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);animation:bpIn .4s cubic-bezier(.2,1.3,.4,1);cursor:pointer}
+#bupill.out{animation:bpOut .22s ease forwards}
+@keyframes bpIn{from{transform:translateX(100%)}}@keyframes bpOut{to{transform:translateX(100%)}}
+.bp-ic{width:26px;height:26px;display:grid;place-items:center}.bp-ic svg.fl{width:24px;height:24px}
+.bp-tx{display:flex;flex-direction:column;line-height:1.1}
+.bp-tx small{font-family:var(--f-mono);font-size:8px;letter-spacing:.14em;color:#d8b4fe}
+.bp-tx b{font-family:var(--f-mono);font-size:12px;font-variant-numeric:tabular-nums}
 .newsbox{width:min(400px,calc(100% - 32px));max-height:calc(100% - 40px);overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:20px 20px 18px;border-radius:26px;background:rgba(14,18,14,.96);border:1px solid rgba(62,224,90,.35);box-shadow:0 0 60px -12px var(--glow);animation:pop .5s cubic-bezier(.2,1.4,.4,1)}
 .nwhead{display:flex;align-items:center;justify-content:space-between}
 .nwfl{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:radial-gradient(circle at 50% 70%,rgba(62,224,90,.35),rgba(62,224,90,.05) 70%);border:1px solid rgba(62,224,90,.3)}
@@ -526,6 +554,7 @@ async function connect(){
 }
 
 /* ---------- logic ---------- */
+const BIG_AT=Date.parse("2026-11-07T18:00:00+01:00");
 const tasksOn=k=>{const d=fromKey(k);return S.tasks.filter(t=>t.days.includes(wd(d))&&t.from<=k&&(!t.week||monKey(k)===t.week))};
 const wkRange=mk=>{const a=fromKey(mk),b=addDays(a,6);return `${a.getDate()}.${a.getMonth()+1}. – ${b.getDate()}.${b.getMonth()+1}.`};
 const wkName=mk=>{const c=monKey(key(new Date()));if(mk===c)return"Tento týždeň";if(mk===key(addDays(fromKey(c),7)))return"Budúci týždeň";if(mk<c)return"Skončený týždeň";return"O "+Math.round((fromKey(mk)-fromKey(c))/6048e5)+" týždne"};
@@ -615,7 +644,7 @@ function render(){
   else if(view==="ch")a.innerHTML=renderCh();
   else a.innerHTML=renderProfile();
   clearTimeout(window.__et);if(ENTER){a.classList.remove("enter");void a.offsetWidth;a.classList.add("enter");ENTER=false;window.__et=setTimeout(()=>a.classList.remove("enter"),900)}else a.classList.remove("enter");
-  renderTabs();bind();tick();
+  renderTabs();bind();buPill();tick();
   const bars=a.querySelectorAll("[data-w]");bars.forEach(b=>{const k=b.dataset.k,w=b.dataset.w;b.style.width=(k in PW?PW[k]:0)+"%";PW[k]=w});
   requestAnimationFrame(()=>requestAnimationFrame(()=>bars.forEach(b=>b.style.width=b.dataset.w+"%")));
 }
@@ -635,6 +664,7 @@ function renderToday(){
     if(done.length) list+=`<div class="sec"><h2>Splnené</h2><span>${done.length}</span></div><div class="list">${done.map(t=>taskCard(t,sel)).join("")}</div>`;
   }
   return `${header()}
+  ${Date.now()<BIG_AT&&!S.buMin?`<div class="bigupd" role="status"><span class="bu-ic">${flameSVG(12)}</span><span class="bu-t"><b>BIG UPDATE</b><em>so 7. 11. · 18:00</em></span><span class="bu-cd" data-bu>${["d","h","m","s"].map(u=>`<span><b>--</b><small>${u}</small></span>`).join("")}</span><button type="button" class="bu-min" data-bumin aria-label="Stiahnuť na bok">${svg('<path d="M9 6l6 6-6 6"/>',2.4)}</button></div>`:""}
   <div class="week">${wk}</div>
   <div class="level"><div class="flame">${flameSVG(lv.L)}</div><div class="meta"><div class="row"><span class="lv">LVL ${lv.L}</span><span class="tier">${TIERS[tierOf(lv.L)].name}</span><span class="xp">${xp} XP</span><span class="next">${lv.need-lv.into} XP do LVL ${lv.L+1}</span></div><div class="bar"><span data-k="lvl" data-w="${(lv.into/lv.need*100).toFixed(1)}"></span></div></div></div>
   <div class="stats"><div class="stat"><b>${s.done}/${s.total}</b><small>Úlohy</small></div><div class="stat"><b>${ico("flame")}${st}</b><small>Séria (dni)</small></div><div class="stat"><b>${s.total?Math.round(s.done/s.total*100):0}%</b><small>Úspešnosť</small></div></div>
@@ -667,8 +697,19 @@ function taskCard(t,k){
   }
   return `<div class="task${done?" done":""}${FX.done===t.id?" just":""}${FX.undo===t.id?" back":""}" data-card="${t.id}"><div class="thead"><div class="ico">${ico(t.icon)}</div><button class="tmain" data-edit="${t.id}"><span class="tname">${esc(t.name)}</span><span class="tsub">${sub}</span></button><div class="actions">${act}</div></div>${extra}</div>`;
 }
+function buVals(now){const s=Math.max(0,Math.floor((BIG_AT-now)/1000));return[s,Math.floor(s/86400),Math.floor(s%86400/3600),Math.floor(s%3600/60),s%60]}
+function buPill(){let el=document.getElementById("bupill");const on=S.buMin&&Date.now()<BIG_AT;
+  if(!on){if(el)el.remove();return}
+  if(!el){el=document.createElement("button");el.id="bupill";el.type="button";el.setAttribute("aria-label","Zobraziť odpočet Big update");
+    el.innerHTML=`<span class="bp-ic">${flameSVG(12)}</span><span class="bp-tx"><small>BIG UPDATE</small><b data-bu-p>--</b></span>`;
+    el.onclick=()=>{SFX.tap();S.buMin=false;save();el.classList.add("out");setTimeout(()=>{el.remove();ENTER=false;render();const b=document.querySelector(".bigupd");if(b)b.classList.add("back")},220)};
+    document.body.appendChild(el)}}
 function tick(){
   const now=new Date();
+  {const [s,dd,hh,mm,ss]=buVals(now);
+   document.querySelectorAll("[data-bu]").forEach(el=>{if(!s){const c=el.closest(".bigupd");if(c)c.remove();return}
+     [dd,hh,mm,ss].forEach((v,i)=>{const b=el.querySelectorAll("b")[i];const t=i?pad(v):String(v);if(b&&b.textContent!==t){b.textContent=t;if(i===3){b.classList.remove("tk");void b.offsetWidth;b.classList.add("tk")}}})});
+   document.querySelectorAll("[data-bu-p]").forEach(el=>{if(!s){buPill();return}el.textContent=`${dd}d ${pad(hh)}:${pad(mm)}:${pad(ss)}`})}
   document.querySelectorAll("[data-cd]").forEach(el=>{const end=el.dataset.cd==="day"?addDays(fromKey(key(now)),1):addDays(fromKey(monKey(key(now))),7);
     let s=Math.max(0,Math.round((end-now)/1000));const dd=Math.floor(s/86400);s%=86400;
     el.textContent=`nové o ${dd?dd+"d ":""}${pad(Math.floor(s/3600))}:${pad(Math.floor(s%3600/60))}:${pad(s%60)}`});
@@ -764,6 +805,7 @@ function bind(){
     b.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}});
     b.addEventListener("contextmenu",e=>e.preventDefault());
   });
+  document.querySelectorAll("[data-bumin]").forEach(b=>b.onclick=()=>{SFX.tap();const c=b.closest(".bigupd");if(c)c.classList.add("going");setTimeout(()=>{S.buMin=true;save();ENTER=false;render()},280)});
   document.querySelectorAll("[data-news]").forEach(b=>b.onclick=()=>{SFX.open();showNews(true)});
   document.querySelectorAll("[data-qnew]").forEach(b=>b.onclick=()=>openQuestEditor(null));
   document.querySelectorAll("[data-qedit]").forEach(b=>b.onclick=()=>openQuestEditor(S.quests.find(q=>q.id===b.dataset.qedit)));
