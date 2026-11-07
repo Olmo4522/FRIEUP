@@ -859,11 +859,13 @@ function fbId(){try{const a=JSON.parse(localStorage.getItem("fireup_auth")||"nul
 const fv=v=>typeof v==="number"?{integerValue:String(Math.round(v))}:{stringValue:String(v)};
 const pv=f=>f.integerValue!=null?+f.integerValue:f.doubleValue!=null?+f.doubleValue:f.stringValue!=null?f.stringValue:"";
 function lbRow(){const xp=totalXP();return{nick:(S.name||"Hráč").slice(0,30),xp,wxp:weekXP(),wk:monKey(key(new Date())),lv:levelOf(xp).L,streak:streak(),flame:(S.eq||{}).flame||"",at:Date.now()}}
-function fbPush(){if(!fbOn)return;clearTimeout(fbT);fbT=setTimeout(()=>{const r=lbRow(),fields={};for(const k in r)fields[k]=fv(r[k]);
-  fetch(`${FBU()}/${fbId()}?key=${FB.key}`,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({fields})}).catch(()=>{})},1500)}
+function fbPush(){if(!fbOn)return;clearTimeout(fbT);fbT=setTimeout(async()=>{const r=lbRow(),fields={};for(const k in r)fields[k]=fv(r[k]);
+  const send=(f,mask)=>fetch(`${FBU()}/${fbId()}?key=${FB.key}${mask?Object.keys(f).map(k=>"&updateMask.fieldPaths="+k).join(""):""}`,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({fields:f})});
+  try{if(!S.name){const f=Object.assign({},fields);delete f.nick;const x=await send(f,true);if(x.ok)return}await send(fields,false)}catch(e){}},1500)}
 async function fbPull(force){if(!fbOn)return;if(!force&&Date.now()-fbPullAt<15000)return;fbPullAt=Date.now();
   try{const j=await (await fetch(`${FBU()}?pageSize=200&key=${FB.key}`)).json();const me=fbId();
    LB=(j.documents||[]).map(d=>{const o={id:d.name.split("/").pop()};for(const k in (d.fields||{}))o[k]=pv(d.fields[k]);o.me=o.id===me;return o});
+   const mine=LB.find(o=>o.me);if(!S.name&&mine&&mine.nick&&mine.nick!=="Hráč"){S.name=mine.nick;save()}
    if(view==="lb")render()}catch(e){}}
 function fbStart(){if(window.claude?.use)return;fbOn=true;fbPush();fbPull(true);setInterval(()=>{if(view==="lb"&&!document.hidden)fbPull(true)},30000)}
 function lbPush(){fbPush();if(!myLb)return;const xp=totalXP();myLb.set({nick:(S.name||"Hráč").slice(0,30),xp,wxp:weekXP(),wk:monKey(key(new Date())),lv:levelOf(xp).L,streak:streak(),flame:(S.eq||{}).flame||"",at:Date.now()}).catch(()=>{})}
