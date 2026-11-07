@@ -888,7 +888,8 @@ function isDone(t,k){const v=(S.log[k]||{})[t.id];
   if(t.type==="count")return (v||0)>=t.goal-1e-9;
   return Array.isArray(v)&&t.items.length>0&&t.items.every((_,i)=>v[i]);}
 function dayStat(k){const ts=tasksOn(k);const d=ts.filter(t=>isDone(t,k)).length;return{total:ts.length,done:d,full:ts.length>0&&d===ts.length}}
-function totalXP(){let x=0;for(const k in S.log){for(const t of S.tasks){if(isDone(t,k))x+=XP_TASK}}
+function totalXP(){return Math.max(0,rawXP()-(S.xpCut||0))}
+function rawXP(){let x=0;for(const k in S.log){for(const t of S.tasks){if(isDone(t,k))x+=XP_TASK}}
   return x+bestStreakAndPerfect().perfect*20+questXP();}
 /* ---------- quests ---------- */
 const DIFF={easy:{n:"Ľahký",xp:50},mid:{n:"Stredný",xp:150},hard:{n:"Ťažký",xp:300},epic:{n:"Epický",xp:600}};
@@ -938,7 +939,7 @@ function totalDone(){let n=0;for(const k in S.log)for(const t of S.tasks)if(isDo
 const BAN_N=5,BAN_WIN=180000,BAN_LEN=86400000;
 function speedCheck(t,k){const n=Date.now();S.dt=(S.dt||[]).filter(e=>n-e.t<=BAN_WIN);S.dt.push({t:n,k,id:t.id});
   if(S.dt.length>=BAN_N){S.dt.forEach(e=>{const x=find(e.id);if(S.log[e.k]){S.log[e.k][e.id]=x&&x.type==="list"?[]:x&&x.type==="count"?0:false}if(S.ts[e.k])delete S.ts[e.k][e.id]});
-    S.dt=[];S.ban={perm:1,at:n};S.lv=levelOf(totalXP()).L;save();render();SFX.undo&&SFX.undo();buzz([60,40,60,40,120]);showBan();return true}
+    S.dt=[];S.ban={perm:1,at:n};S.xpCut=rawXP();S.spent=(S.spent||0)+coins();S.lv=levelOf(totalXP()).L;save();render();SFX.undo&&SFX.undo();buzz([60,40,60,40,120]);showBan();return true}
   return false}
 function showBan(){if(!S.ban||(!S.ban.perm&&S.ban.until<=Date.now())){if(S.ban){delete S.ban;save()}const o=document.getElementById("banlock");if(o)o.remove();return}
   let o=document.getElementById("banlock");if(!o){o=document.createElement("div");o.id="banlock";o.setAttribute("role","alertdialog");o.setAttribute("aria-modal","true");
