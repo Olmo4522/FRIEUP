@@ -301,7 +301,7 @@ html.ics-gold .ico svg,.ico.isk-gold svg{filter:drop-shadow(0 0 6px rgba(245,197
 .boxopen.open .bo-info{transition:opacity .4s .55s,transform .4s .55s;opacity:1;transform:none}
 @keyframes itemIn{to{opacity:1;transform:none}}
 .lbseg{margin-top:-4px}
-#banlock{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 50% 35%,rgba(239,68,68,.28),rgba(5,3,3,.96) 65%);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);animation:banin .5s cubic-bezier(.2,.9,.3,1.2) both}
+#banlock{position:fixed;inset:0;z-index:150;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 50% 35%,rgba(239,68,68,.28),rgba(5,3,3,.96) 65%);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);animation:banin .5s cubic-bezier(.2,.9,.3,1.2) both}
 @keyframes banin{from{opacity:0;transform:scale(1.06)}to{opacity:1;transform:none}}
 .banbox{max-width:340px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;color:#fde8e8}
 .banic{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;color:#fff;background:linear-gradient(150deg,#f87171,#b91c1c);box-shadow:0 0 0 6px rgba(239,68,68,.18),0 0 60px -8px #ef4444;margin-bottom:6px;animation:banp 1.6s ease-in-out infinite}.banic svg{width:44px;height:44px}
@@ -721,8 +721,9 @@ function lsSet(){try{localStorage.setItem("ohnisko",JSON.stringify(S))}catch(e){
 function save(){
   lsSet();
   clearTimeout(saveT);
-  saveT=setTimeout(()=>{ if(dbDoc) dbDoc.set({state:JSON.stringify(S),at:Date.now()}).catch(()=>{}); lbPush(); },700);
+  saveT=setTimeout(()=>{ if(dbDoc){myAt=Date.now(); dbDoc.set({state:JSON.stringify(S),at:myAt}).catch(()=>{});} lbPush(); },700);
 }
+let myAt=0;
 async function connect(){
   try{
     const user=await window.claude?.use?.("user"); const db=await window.claude?.use?.("db");
@@ -735,7 +736,9 @@ async function connect(){
     S.eq=S.eq||{};S.owned=S.owned||[];applySkin();
     lbRef=db.collection("lb");myLb=lbRef.doc(id);lbPush();
     lbRef.onSnapshot(q=>{LB=(q.docs||[]).filter(d=>d.exists).map(d=>Object.assign({id:d.id,me:d.id===id},d.data()));if(view==="lb")render()},()=>{});
-    syncMode="synchronizované v účte"; render();
+    myAt=(snap.exists&&snap.data().at)||Date.now();
+    dbDoc.onSnapshot(d=>{try{const v=d&&d.exists&&d.data();if(!v||!v.state||!(v.at>myAt))return;myAt=v.at;S=JSON.parse(v.state);S.quests=S.quests||[];S.ts=S.ts||{};S.eq=S.eq||{};S.owned=S.owned||[];lsSet();applySkin();render();showBan()}catch(e){}},()=>{});
+    syncMode="synchronizované v účte"; render(); showBan();
   }catch(e){ dbDoc=null; }
 }
 
@@ -877,7 +880,8 @@ async function fbPull(force){if(!fbOn)return;if(!force&&Date.now()-fbPullAt<1500
    LB=(j.documents||[]).map(d=>{const o={id:d.name.split("/").pop()};for(const k in (d.fields||{}))o[k]=pv(d.fields[k]);o.me=o.id===me;return o});
    const mine=LB.find(o=>o.me);if(!S.name&&mine&&mine.nick&&mine.nick!=="Hráč"){S.name=mine.nick;save()}
    if(view==="lb")render()}catch(e){}}
-function fbStart(){if(window.claude?.use)return;fbOn=true;fbPush();fbPull(true);setInterval(()=>{if(view==="lb"&&!document.hidden)fbPull(true)},30000)}
+async function fbUnban(){if(!S.ban)return;try{const r=await fetch(`https://firestore.googleapis.com/v1/projects/${FB.pid}/databases/(default)/documents/unban/${fbId()}?key=${FB.key}`);if(!r.ok)return;const j=await r.json();const at=+pv((j.fields||{}).at||{});if(at>(S.ban.at||0)){delete S.ban;S.dt=[];save();showBan();render()}}catch(e){}}
+function fbStart(){if(window.claude?.use)return;fbOn=true;fbUnban();fbPush();fbPull(true);setInterval(()=>{if(view==="lb"&&!document.hidden)fbPull(true)},30000)}
 function lbPush(){fbPush();if(!myLb)return;const xp=totalXP();myLb.set({nick:(S.name||"Hráč").slice(0,30),xp,wxp:weekXP(),wk:monKey(key(new Date())),lv:levelOf(xp).L,streak:streak(),flame:(S.eq||{}).flame||"",at:Date.now()}).catch(()=>{})}
 const BIG_AT=Date.parse("2026-11-07T18:00:00+01:00");
 const tasksOn=k=>{const d=fromKey(k);return S.tasks.filter(t=>t.days.includes(wd(d))&&t.from<=k&&(!t.week||monKey(k)===t.week))};
