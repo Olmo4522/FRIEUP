@@ -1,7 +1,7 @@
 /* FireUp Android: prístup len pre povolený účet + kontrola aktualizácií */
 (function () {
   "use strict";
-  var ALLOWED = ["d49eee7c5c5a31f951dd0670f8d1427229ef2527063f47762bc404d5299a38bf", "03939395fcb899d193dacc6e2e37ef57e495052c41b6865350b04502e7280067", "66b3c14853680877d4dccc21ce28e7275e4863ca5a0f6edb97423bc8ea5fcb63"];
+  var ALLOWED = ["d49eee7c5c5a31f951dd0670f8d1427229ef2527063f47762bc404d5299a38bf", "03939395fcb899d193dacc6e2e37ef57e495052c41b6865350b04502e7280067", "66b3c14853680877d4dccc21ce28e7275e4863ca5a0f6edb97423bc8ea5fcb63", "fb83f07969a0a9986c0d511ce65fca606c108807b41bbad906cc7d19bebb78cc", "63009a909170303d01644c83726309ae65edad77b9910bb506a56e9226b9a573"];
   var REPO = "Olmo4522/FRIEUP";
   var KEY = "fireup_auth";
   var params = new URLSearchParams(location.search);
