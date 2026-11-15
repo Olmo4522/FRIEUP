@@ -1,7 +1,7 @@
 <!doctype html><html lang="sk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"><style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui}img{max-width:100%}[hidden]{display:none!important}</style></head><body><title>FireUp</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&display=swap">
 <style>
 /* Layout: single phone-width column, sticky week strip on top, fixed tab bar at the bottom, sheets slide up for add/edit. */
 :root{
@@ -380,21 +380,20 @@ html.lightsk .pdx{color:#222}html.lightsk .ped span{color:#fff}
 .bp-tx small{font-family:var(--f-mono);font-size:8px;letter-spacing:.14em;color:#d8b4fe}
 .bp-tx b{font-family:var(--f-mono);font-size:12px;font-variant-numeric:tabular-nums}
 /* GTA 6 update banner */
-.bigupd{border-color:rgba(255,94,158,.65);box-shadow:0 0 28px -10px #ff5e9e}
-.bigupd::before{background:conic-gradient(from 0deg,transparent 0 62%,rgba(255,94,158,.6) 76%,rgba(255,170,60,.6) 87%,rgba(56,225,255,.45) 95%,transparent 100%);opacity:.75}
-.bigupd::after,html.lightsk .bigupd::after{background:linear-gradient(180deg,rgba(255,94,158,.22),rgba(255,140,60,.12) 50%,transparent),repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 4px),linear-gradient(135deg,#1c0b28,#2c0f30 55%,#0d1b2e)}
-.bu-ic,.bp-ic{background:linear-gradient(180deg,#ffd35a,#ff7a3d 40%,#ff3d8b 75%,#a238ff);box-shadow:0 0 14px -2px rgba(255,94,158,.75)}
-.bp-ic{border-radius:8px}
-.g6{font-family:var(--f-display);font-style:italic;font-weight:900;font-size:22px;line-height:1;color:#fff;text-shadow:0 2px 0 rgba(60,0,40,.45)}
-.bp-ic .g6{font-size:16px}
-.bu-t b{background:linear-gradient(90deg,#ffd36b,#ff8a3d 35%,#ff3d8b 70%,#c56bff);-webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic;font-weight:900;letter-spacing:.05em}
-.bu-t em{color:#ffc2de}
-.bu-cd span,html.lightsk .bu-cd span{background:rgba(255,94,158,.12);border-color:rgba(255,94,158,.4)}
-.bu-cd b{color:#fff;text-shadow:0 0 8px rgba(255,94,158,.8)}
-.bu-cd small{color:#ffb38a}
-.bu-min{color:#ffc2de}
-#bupill,html.lightsk #bupill{background:linear-gradient(135deg,#2c0f30,#1c0b28)!important;border-color:rgba(255,94,158,.65)!important;box-shadow:0 0 22px -8px #ff5e9e!important;color:#fff}
-.bp-tx small,html.lightsk .bp-tx small{color:#ff8ac0}
+.bigupd{border:2px solid rgba(255,255,255,.9);border-radius:8px;box-shadow:0 0 0 1px rgba(0,0,0,.55),0 10px 30px -12px #ff5e9e}
+.bigupd::before{inset:0;z-index:-1;animation:none;opacity:1;border-radius:6px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 80'%3E%3Cpath fill='%23170a24' d='M31 80c1-18 0-32-3-44l3-1c3 12 4 27 3 45z'/%3E%3Cpath fill='%23170a24' d='M30 36c-6-8-17-10-27-6 9-1 18 2 24 8zm0 0c2-9 11-15 22-14-9 2-16 7-19 15zm0 0c-9-3-20 0-25 8 7-5 16-7 23-5zm0 0c8-4 19-3 26 4-8-3-17-4-24-1zm0 0c-1-8 3-17 10-21-5 6-7 13-7 21z'/%3E%3C/svg%3E") no-repeat right 100px bottom -8px/42px 58px,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 80'%3E%3Cpath fill='%23170a24' d='M31 80c1-18 0-32-3-44l3-1c3 12 4 27 3 45z'/%3E%3Cpath fill='%23170a24' d='M30 36c-6-8-17-10-27-6 9-1 18 2 24 8zm0 0c2-9 11-15 22-14-9 2-16 7-19 15zm0 0c-9-3-20 0-25 8 7-5 16-7 23-5zm0 0c8-4 19-3 26 4-8-3-17-4-24-1zm0 0c-1-8 3-17 10-21-5 6-7 13-7 21z'/%3E%3C/svg%3E") no-repeat right 134px bottom -14px/30px 44px}
+.bigupd::after,html.lightsk .bigupd::after{inset:0;z-index:-2;border-radius:6px;background:linear-gradient(90deg,rgba(24,8,36,.8),rgba(24,8,36,.35) 55%,rgba(24,8,36,.12)),radial-gradient(circle at 74% 130%,#ffe07a 0 30%,#ffb46b 31% 34%,transparent 35%),linear-gradient(180deg,#3a1d63 0%,#8a3487 38%,#ff6f91 72%,#ffb36b 100%)}
+.bu-ic,.bp-ic{background:linear-gradient(160deg,#ff8fc6,#ff3d8b 45%,#7b3bff);border-radius:6px;border:2px solid #fff;box-shadow:2px 2px 0 rgba(0,0,0,.45)}
+.g6{font-family:'Anton',Impact,'Arial Black',sans-serif;font-size:22px;line-height:1;color:#fff;text-shadow:2px 2px 0 rgba(60,0,60,.55)}
+.bp-ic .g6{font-size:15px}
+.bu-t b{font-family:'Anton',Impact,'Arial Black',sans-serif;font-size:17px;font-weight:400;font-style:normal;letter-spacing:.04em;color:#fff;-webkit-text-fill-color:#fff;background:none;text-shadow:2px 2px 0 #ff3d8b,0 0 12px rgba(255,140,190,.55)}
+.bu-t em{color:#ffe1ef;font-weight:600}
+.bu-cd span,html.lightsk .bu-cd span{background:rgba(20,6,30,.62);border:1px solid rgba(255,255,255,.55);border-radius:6px}
+.bu-cd b{font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:15px;color:#fff;text-shadow:0 0 8px rgba(255,94,158,.8)}
+.bu-cd small{color:#ffc58a}
+.bu-min{color:#fff}
+#bupill,html.lightsk #bupill{background:linear-gradient(180deg,#3a1d63,#8a3487 55%,#ff6f91)!important;border:2px solid rgba(255,255,255,.9)!important;border-right:0!important;box-shadow:0 8px 22px -8px #ff5e9e!important;color:#fff}
+.bp-tx small,html.lightsk .bp-tx small{color:#ffe1ef;font-family:'Anton',Impact,sans-serif;font-size:10px;letter-spacing:.08em}
 .bp-tx b{color:#fff}
 .newsbox{width:min(400px,calc(100% - 32px));max-height:calc(100% - 40px);overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:20px 20px 18px;border-radius:26px;background:rgba(14,18,14,.96);border:1px solid rgba(var(--acc-rgb),.35);box-shadow:0 0 60px -12px var(--glow);animation:pop .5s cubic-bezier(.2,1.4,.4,1)}
 .nwhead{display:flex;align-items:center;justify-content:space-between}
