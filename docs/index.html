@@ -379,6 +379,23 @@ html.lightsk .pdx{color:#222}html.lightsk .ped span{color:#fff}
 .bp-tx{display:flex;flex-direction:column;line-height:1.1}
 .bp-tx small{font-family:var(--f-mono);font-size:8px;letter-spacing:.14em;color:#d8b4fe}
 .bp-tx b{font-family:var(--f-mono);font-size:12px;font-variant-numeric:tabular-nums}
+/* GTA 6 update banner */
+.bigupd{border-color:rgba(255,94,158,.65);box-shadow:0 0 28px -10px #ff5e9e}
+.bigupd::before{background:conic-gradient(from 0deg,transparent 0 62%,rgba(255,94,158,.6) 76%,rgba(255,170,60,.6) 87%,rgba(56,225,255,.45) 95%,transparent 100%);opacity:.75}
+.bigupd::after,html.lightsk .bigupd::after{background:linear-gradient(180deg,rgba(255,94,158,.22),rgba(255,140,60,.12) 50%,transparent),repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 4px),linear-gradient(135deg,#1c0b28,#2c0f30 55%,#0d1b2e)}
+.bu-ic,.bp-ic{background:linear-gradient(180deg,#ffd35a,#ff7a3d 40%,#ff3d8b 75%,#a238ff);box-shadow:0 0 14px -2px rgba(255,94,158,.75)}
+.bp-ic{border-radius:8px}
+.g6{font-family:var(--f-display);font-style:italic;font-weight:900;font-size:22px;line-height:1;color:#fff;text-shadow:0 2px 0 rgba(60,0,40,.45)}
+.bp-ic .g6{font-size:16px}
+.bu-t b{background:linear-gradient(90deg,#ffd36b,#ff8a3d 35%,#ff3d8b 70%,#c56bff);-webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic;font-weight:900;letter-spacing:.05em}
+.bu-t em{color:#ffc2de}
+.bu-cd span,html.lightsk .bu-cd span{background:rgba(255,94,158,.12);border-color:rgba(255,94,158,.4)}
+.bu-cd b{color:#fff;text-shadow:0 0 8px rgba(255,94,158,.8)}
+.bu-cd small{color:#ffb38a}
+.bu-min{color:#ffc2de}
+#bupill,html.lightsk #bupill{background:linear-gradient(135deg,#2c0f30,#1c0b28)!important;border-color:rgba(255,94,158,.65)!important;box-shadow:0 0 22px -8px #ff5e9e!important;color:#fff}
+.bp-tx small,html.lightsk .bp-tx small{color:#ff8ac0}
+.bp-tx b{color:#fff}
 .newsbox{width:min(400px,calc(100% - 32px));max-height:calc(100% - 40px);overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:20px 20px 18px;border-radius:26px;background:rgba(14,18,14,.96);border:1px solid rgba(var(--acc-rgb),.35);box-shadow:0 0 60px -12px var(--glow);animation:pop .5s cubic-bezier(.2,1.4,.4,1)}
 .nwhead{display:flex;align-items:center;justify-content:space-between}
 .nwfl{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:radial-gradient(circle at 50% 70%,rgba(var(--acc-rgb),.35),rgba(var(--acc-rgb),.05) 70%);border:1px solid rgba(var(--acc-rgb),.3)}
@@ -883,7 +900,7 @@ async function fbPull(force){if(!fbOn)return;if(!force&&Date.now()-fbPullAt<1500
 async function fbUnban(){if(!S.ban)return;try{const r=await fetch(`https://firestore.googleapis.com/v1/projects/${FB.pid}/databases/(default)/documents/unban/${fbId()}?key=${FB.key}`);if(!r.ok)return;const j=await r.json();const at=+pv((j.fields||{}).at||{});if(at>(S.ban.at||0)){delete S.ban;S.dt=[];save();showBan();render()}}catch(e){}}
 function fbStart(){if(window.claude?.use)return;fbOn=true;fbUnban();fbPush();fbPull(true);setInterval(()=>{if(view==="lb"&&!document.hidden)fbPull(true)},30000)}
 function lbPush(){fbPush();if(!myLb)return;const xp=totalXP();myLb.set({nick:(S.name||"Hráč").slice(0,30),xp,wxp:weekXP(),wk:monKey(key(new Date())),lv:levelOf(xp).L,streak:streak(),flame:(S.eq||{}).flame||"",at:Date.now()}).catch(()=>{})}
-const BIG_AT=Date.parse("2026-11-07T18:00:00+01:00");
+const BIG_AT=Date.parse("2026-11-19T18:00:00+01:00");
 const tasksOn=k=>{const d=fromKey(k);return S.tasks.filter(t=>t.days.includes(wd(d))&&t.from<=k&&(!t.week||monKey(k)===t.week))};
 const wkRange=mk=>{const a=fromKey(mk),b=addDays(a,6);return `${a.getDate()}.${a.getMonth()+1}. – ${b.getDate()}.${b.getMonth()+1}.`};
 const wkName=mk=>{const c=monKey(key(new Date()));if(mk===c)return"Tento týždeň";if(mk===key(addDays(fromKey(c),7)))return"Budúci týždeň";if(mk<c)return"Skončený týždeň";return"O "+Math.round((fromKey(mk)-fromKey(c))/6048e5)+" týždne"};
@@ -1010,7 +1027,7 @@ function renderToday(){
     if(done.length) list+=`<div class="sec"><h2>Splnené</h2><span>${done.length}</span></div><div class="list">${done.map(t=>taskCard(t,sel)).join("")}</div>`;
   }
   return `${header()}
-  ${Date.now()<BIG_AT&&!S.buMin?`<div class="bigupd" role="status"><span class="bu-ic">${flameSVG(12)}</span><span class="bu-t"><b>BIG UPDATE</b><em>so 7. 11. · 18:00</em></span><span class="bu-cd" data-bu>${["d","h","m","s"].map(u=>`<span><b>--</b><small>${u}</small></span>`).join("")}</span><button type="button" class="bu-min" data-bumin aria-label="Stiahnuť na bok">${svg('<path d="M9 6l6 6-6 6"/>',2.4)}</button></div>`:""}
+  ${Date.now()<BIG_AT&&!S.gtaMin?`<div class="bigupd" role="status"><span class="bu-ic"><i class="g6">6</i></span><span class="bu-t"><b>GTA 6 UPDATE</b><em>št 19. 11. · 18:00</em></span><span class="bu-cd" data-bu>${["d","h","m","s"].map(u=>`<span><b>--</b><small>${u}</small></span>`).join("")}</span><button type="button" class="bu-min" data-bumin aria-label="Stiahnuť na bok">${svg('<path d="M9 6l6 6-6 6"/>',2.4)}</button></div>`:""}
   <div class="week">${wk}</div>
   <div class="level"><div class="flame">${flameSVG(lv.L)}</div><div class="meta"><div class="row"><span class="lv">LVL ${lv.L}</span><span class="tier">${TIERS[tierOf(lv.L)].name}</span><span class="xp">${xp} XP</span><span class="next">${lv.need-lv.into} XP do LVL ${lv.L+1}</span></div><div class="bar"><span data-k="lvl" data-w="${(lv.into/lv.need*100).toFixed(1)}"></span></div></div></div>
   <div class="stats"><div class="stat"><b>${s.done}/${s.total}</b><small>Úlohy</small></div><div class="stat"><b>${ico("flame")}${st}</b><small>Séria (dni)</small></div><div class="stat"><b>${s.total?Math.round(s.done/s.total*100):0}%</b><small>Úspešnosť</small></div></div>
@@ -1044,11 +1061,11 @@ function taskCard(t,k){
   return `<div class="task${done?" done":""}${FX.done===t.id?" just":""}${FX.undo===t.id?" back":""}" data-card="${t.id}"><div class="thead"><div class="ico">${ico(t.icon)}</div><button class="tmain" data-edit="${t.id}"><span class="tname">${esc(t.name)}</span><span class="tsub">${sub}</span></button><div class="actions">${act}</div></div>${extra}</div>`;
 }
 function buVals(now){const s=Math.max(0,Math.floor((BIG_AT-now)/1000));return[s,Math.floor(s/86400),Math.floor(s%86400/3600),Math.floor(s%3600/60),s%60]}
-function buPill(){let el=document.getElementById("bupill");const on=S.buMin&&Date.now()<BIG_AT;
+function buPill(){let el=document.getElementById("bupill");const on=S.gtaMin&&Date.now()<BIG_AT;
   if(!on){if(el)el.remove();return}
-  if(!el){el=document.createElement("button");el.id="bupill";el.type="button";el.setAttribute("aria-label","Zobraziť odpočet Big update");
-    el.innerHTML=`<span class="bp-ic">${flameSVG(12)}</span><span class="bp-tx"><small>BIG UPDATE</small><b data-bu-p>--</b></span>`;
-    el.onclick=()=>{SFX.tap();S.buMin=false;save();el.classList.add("out");setTimeout(()=>{el.remove();ENTER=false;render();const b=document.querySelector(".bigupd");if(b)b.classList.add("back")},220)};
+  if(!el){el=document.createElement("button");el.id="bupill";el.type="button";el.setAttribute("aria-label","Zobraziť odpočet GTA 6 update");
+    el.innerHTML=`<span class="bp-ic"><i class="g6">6</i></span><span class="bp-tx"><small>GTA 6 UPDATE</small><b data-bu-p>--</b></span>`;
+    el.onclick=()=>{SFX.tap();S.gtaMin=false;save();el.classList.add("out");setTimeout(()=>{el.remove();ENTER=false;render();const b=document.querySelector(".bigupd");if(b)b.classList.add("back")},220)};
     document.body.appendChild(el)}}
 function tick(){
   const now=new Date();
@@ -1187,7 +1204,7 @@ function bind(){
   document.querySelectorAll("[data-equip]").forEach(b=>b.onclick=()=>{const x=skinById(b.dataset.equip);S.eq=S.eq||{};if(SK(x.cat).id===x.id)return;S.eq[x.cat]=x.id;save();applySkin();SFX.save();buzz(15);ENTER=false;render();const n=document.querySelector(`[data-equip="${x.id}"]`);if(n){const r=n.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,22,false,[RAR[x.r].c,"#fff"])}toast("Nasadené: "+x.n)});
   document.querySelectorAll("[data-lbm]").forEach(b=>b.onclick=()=>{if((window.__lbm||"w")===b.dataset.lbm)return;SFX.tap();window.__lbm=b.dataset.lbm;ENTER=true;render()});
   const lbn=$("#lbName");if(lbn)lbn.onchange=()=>{const v=lbn.value.trim();if(!v)return;S.name=v;save();SFX.save();render();toast("Prezývka uložená")};
-  document.querySelectorAll("[data-bumin]").forEach(b=>b.onclick=()=>{SFX.tap();const c=b.closest(".bigupd");if(c)c.classList.add("going");setTimeout(()=>{S.buMin=true;save();ENTER=false;render()},280)});
+  document.querySelectorAll("[data-bumin]").forEach(b=>b.onclick=()=>{SFX.tap();const c=b.closest(".bigupd");if(c)c.classList.add("going");setTimeout(()=>{S.gtaMin=true;save();ENTER=false;render()},280)});
   document.querySelectorAll("[data-ui]").forEach(b=>b.onclick=()=>{const v=b.dataset.ui;if((S.ui||"sk")===v)return;SFX.tap();S.ui=v;S.lang=v;save();ENTER=false;render();toast(v==="en"?"Language: English":"Jazyk: slovenčina")});
   document.querySelectorAll("[data-news]").forEach(b=>b.onclick=()=>{SFX.open();showNews(true)});
   document.querySelectorAll("[data-qnew]").forEach(b=>b.onclick=()=>openQuestEditor(null));
