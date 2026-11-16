@@ -877,7 +877,7 @@ function showBoxOpen(b,it,dup){const R=RAR[it.r];
   $("#boX").onclick=()=>{SFX.tap();close()};
   const eq=$("#boEq");if(eq)eq.onclick=()=>{S.eq=S.eq||{};S.eq[it.cat]=it.id;save();applySkin();SFX.save();close();setTimeout(()=>toast("Nasadené: "+it.n),300)};
   const ag=$("#boAg");if(ag){if(coins()<b.price)ag.disabled=true;ag.onclick=()=>{SFX.tap();openBox(b.id)}}}
-const DEMO=[{nick:"Hráč A",xp:2400,wxp:620,lv:6,streak:9,flame:"fl-blue",demo:1},{nick:"Hráč B",xp:1500,wxp:410,lv:4,streak:3,flame:"fl-red",demo:1},{nick:"Hráč C",xp:700,wxp:150,lv:3,streak:1,flame:"",demo:1},{nick:"Hráč D",xp:420,wxp:90,lv:2,streak:2,flame:"fl-violet",demo:1},{nick:"Hráč E",xp:180,wxp:40,lv:1,streak:0,flame:"fl-ice",demo:1}];
+const DEMO=[];
 let LB=[],lbRef=null,myLb=null;
 /* ---------- Firebase rebríček (appka mimo Claude) ---------- */
 const FB={pid:"fireup-46409",key:"AIzaSyDx4TwohgFxx31BCY182J3RTJLfRq2wFCE"};
@@ -888,16 +888,18 @@ function fbId(){try{const a=JSON.parse(localStorage.getItem("fireup_auth")||"nul
 const fv=v=>typeof v==="number"?{integerValue:String(Math.round(v))}:{stringValue:String(v)};
 const pv=f=>f.integerValue!=null?+f.integerValue:f.doubleValue!=null?+f.doubleValue:f.stringValue!=null?f.stringValue:"";
 function lbRow(){const xp=totalXP();return{nick:(S.name||"Hráč").slice(0,30),xp,wxp:weekXP(),wk:monKey(key(new Date())),lv:levelOf(xp).L,streak:streak(),flame:(S.eq||{}).flame||"",at:Date.now()}}
-function fbPush(){if(!fbOn)return;clearTimeout(fbT);fbT=setTimeout(async()=>{const r=lbRow(),fields={};for(const k in r)fields[k]=fv(r[k]);
-  const send=(f,mask)=>fetch(`${FBU()}/${fbId()}?key=${FB.key}${mask?Object.keys(f).map(k=>"&updateMask.fieldPaths="+k).join(""):""}`,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({fields:f})});
-  try{if(!S.name){const f=Object.assign({},fields);delete f.nick;const x=await send(f,true);if(x.ok)return}await send(fields,false)}catch(e){}},1500)}
+function fbPush(){if(!fbOn)return;clearTimeout(fbT);fbT=setTimeout(fbSend,600)}
+function fbFlush(){if(!fbOn)return;clearTimeout(fbT);fbSend()}
+async function fbSend(){const r=lbRow(),fields={};for(const k in r)fields[k]=fv(r[k]);
+  const send=(f,mask)=>fetch(`${FBU()}/${fbId()}?key=${FB.key}${mask?Object.keys(f).map(k=>"&updateMask.fieldPaths="+k).join(""):""}`,{method:"PATCH",headers:{"Content-Type":"application/json"},keepalive:true,body:JSON.stringify({fields:f})});
+  try{if(!S.name){const f=Object.assign({},fields);delete f.nick;const x=await send(f,true);if(x.ok)return}await send(fields,false)}catch(e){}}
 async function fbPull(force){if(!fbOn)return;if(!force&&Date.now()-fbPullAt<15000)return;fbPullAt=Date.now();
   try{const j=await (await fetch(`${FBU()}?pageSize=200&key=${FB.key}`)).json();const me=fbId();
-   LB=(j.documents||[]).map(d=>{const o={id:d.name.split("/").pop()};for(const k in (d.fields||{}))o[k]=pv(d.fields[k]);o.me=o.id===me;return o});
+   LB=(j.documents||[]).map(d=>{const o={id:d.name.split("/").pop()};for(const k in (d.fields||{}))o[k]=pv(d.fields[k]);o.me=o.id===me;return o}).filter(o=>/^u/.test(o.id));
    const mine=LB.find(o=>o.me);if(!S.name&&mine&&mine.nick&&mine.nick!=="Hráč"){S.name=mine.nick;save()}
    if(view==="lb")render()}catch(e){}}
 async function fbUnban(){if(!S.ban)return;try{const r=await fetch(`https://firestore.googleapis.com/v1/projects/${FB.pid}/databases/(default)/documents/unban/${fbId()}?key=${FB.key}`);if(!r.ok)return;const j=await r.json();const at=+pv((j.fields||{}).at||{});if(at>(S.ban.at||0)){delete S.ban;S.dt=[];save();showBan();render()}}catch(e){}}
-function fbStart(){if(window.claude?.use)return;fbOn=true;fbUnban();fbPush();fbPull(true);setInterval(()=>{if(view==="lb"&&!document.hidden)fbPull(true)},30000)}
+function fbStart(){if(window.claude?.use)return;fbOn=true;fbUnban();fbPush();fbPull(true);setInterval(()=>{if(view==="lb"&&!document.hidden)fbPull(true)},10000);setInterval(()=>{if(!document.hidden)fbPush()},60000);document.addEventListener("visibilitychange",()=>{if(document.hidden)fbFlush();else{fbPush();if(view==="lb")fbPull(true)}});addEventListener("pagehide",fbFlush)}
 function lbPush(){fbPush();if(!myLb)return;const xp=totalXP();myLb.set({nick:(S.name||"Hráč").slice(0,30),xp,wxp:weekXP(),wk:monKey(key(new Date())),lv:levelOf(xp).L,streak:streak(),flame:(S.eq||{}).flame||"",at:Date.now()}).catch(()=>{})}
 const BIG_AT=Date.parse("2026-11-19T18:00:00+01:00");
 const tasksOn=k=>{const d=fromKey(k);return S.tasks.filter(t=>t.days.includes(wd(d))&&t.from<=k&&(!t.week||monKey(k)===t.week))};
@@ -1003,7 +1005,7 @@ function render(){
   else if(view==="stats")a.innerHTML=renderStats();
   else if(view==="ch")a.innerHTML=renderCh();
   else if(view==="shop")a.innerHTML=renderShop();
-  else if(view==="lb"){a.innerHTML=renderLB();fbPull()}
+  else if(view==="lb"){a.innerHTML=renderLB();fbPull(true)}
   else a.innerHTML=renderProfile();
   clearTimeout(window.__et);if(ENTER){a.classList.remove("enter");void a.offsetWidth;a.classList.add("enter");ENTER=false;window.__et=setTimeout(()=>a.classList.remove("enter"),900)}else a.classList.remove("enter");
   renderTabs();bind();buPill();tick();applyLang();
@@ -1096,7 +1098,7 @@ function renderShop(){const c=coins(),own=new Set(ownedIds()),cur=window.__scat|
 function renderLB(){const mode=window.__lbm||"w",cw=monKey(key(new Date())),xp=totalXP();
   const me={me:1,nick:S.name||"Ty",xp,wxp:weekXP(),lv:levelOf(xp).L,streak:streak(),flame:(S.eq||{}).flame||""};
   let rows=LB.filter(r=>!r.me).map(r=>Object.assign({},r,{wxp:r.wk===cw?r.wxp:0}));rows.push(me);
-  const demo=rows.length<2;if(demo)rows=rows.concat(DEMO);
+  const demo=false;
   rows.sort((a,b)=>mode==="w"?b.wxp-a.wxp:b.xp-a.xp);
   return `${header()}<p class="h1">Rebríček</p>
   <div class="seg seg2 lbseg"><button type="button" data-lbm="w" class="${mode==="w"?"on":""}">Tento týždeň</button><button type="button" data-lbm="a" class="${mode==="a"?"on":""}">Celkovo</button></div>
