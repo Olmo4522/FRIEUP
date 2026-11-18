@@ -1404,7 +1404,7 @@ function toast(msg){const el=document.createElement("div");el.className="toast";
 function closeLayer(){const sc=$("#layer .scrim");if(!sc){$("#layer").innerHTML="";return}if(sc.classList.contains("closing"))return;SFX.close();sc.classList.add("closing");setTimeout(()=>{if(sc.parentNode)$("#layer").innerHTML=""},230)}
 function xpFloat(x,y,txt){const el=document.createElement("div");el.className="xpf";el.textContent=txt;el.style.left=x+"px";el.style.top=y+"px";document.body.appendChild(el);setTimeout(()=>el.remove(),1200)}
 /* ---------- čo je nové ---------- */
-const NEWS_ID="2026-11-big-update-lb";
+const NEWS_ID="2026-11-gta6-event";
 const PHONE='<rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/>';
 const BRUSH='<path d="M14 4l6 6-8.5 8.5a3 3 0 0 1-4.2 0l-1.8-1.8a3 3 0 0 1 0-4.2Z"/><path d="M4 20l3-3"/>';
 const LOOP='<path d="M17 2l3 3-3 3"/><path d="M4 11V9a4 4 0 0 1 4-4h12M7 22l-3-3 3-3"/><path d="M20 13v2a4 4 0 0 1-4 4H4"/>';
@@ -1413,22 +1413,29 @@ const BOXI='<path d="M3 8l9-5 9 5v8l-9 5-9-5Z"/><path d="M3 8l9 5 9-5M12 13v8"/>
 const FLI='<path d="M12 3c1 3.5 5 5.5 5 10a5 5 0 0 1-10 0c0-2.6 1.4-4 2.6-5.3.3 1.6 1 2.6 2 3.2-.6-3.3.4-5.6.4-7.9Z"/>';
 const GLOBE='<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>';
 const LBI='<path d="M3 20h18M5 20v-6h4v6M10 20V9h4v11M15 20v-8h4v8"/>';
+const SUNI='<circle cx="12" cy="14" r="5"/><path d="M2 19h20M12 4v3M4.9 7.9l2.1 2.1M19.1 7.9 17 10"/>';
+const BELLI='<path d="M6 9a6 6 0 0 1 12 0c0 6 2.5 7.5 2.5 7.5h-17S6 15 6 9Z"/><path d="M10 20a2 2 0 0 0 4 0"/>';
+const CLOUDI='<path d="M7 18a4.5 4.5 0 0 1-.6-9 6 6 0 0 1 11.4 1.6A3.8 3.8 0 0 1 17.5 18Z"/><path d="M12 16v-5M9.5 13.5 12 11l2.5 2.5"/>';
+const CROWNI='<path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5Z"/>';
+const SHIELDI='<path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6Z"/><path d="M9 12l2 2 4-4"/>';
 const NEWS={
- en:{eyebrow:"BIG UPDATE",title:"Coins, boxes and skins",ok:"Let's go",items:[
-  {i:LBI,t:"Leaderboard is live",d:"The Leaderboard tab is back. You and your friends see each other with nickname, XP, level and flame, for this week and all time. Set your nickname at the top of the Leaderboard."},
-  {i:COINI,t:"Earn coins",d:"Every task gives +10 coins, a perfect day +20, a new level +50 and quests up to +150. As a Big update gift you get 300 coins right now."},
-  {i:BOXI,t:"Open boxes",d:"The new Shop tab has a Common, Rare and Legendary box. Each one drops a random skin. Every chance is shown as 1/N for one specific skin, e.g. a legendary skin from a Common box is 1/3000."},
-  {i:BRUSH,t:"Backgrounds, colors and icons",d:"17 backgrounds, including light ones like White, Mint or Pastel and colorful ones like Neon city. Plus app colors and whole new icon sets like Hand-drawn or Pixel 8-bit. Icons take on your Color skin."},
-  {i:FLI,t:"New flames",d:"Flame skins now have their own shape and texture: Spirit, Plasma, Inferno, Royal, Crystal, Pixel, Void and Rainbow. Tap a skin in your Collection to equip it."},
-  {i:GLOBE,t:"English language",d:"In Profile (top right) you can now switch the whole app between Slovak and English."}],
+ en:{eyebrow:"GTA 6 UPDATE",title:"The GTA 6 event is live",ok:"Let's go",items:[
+  {i:SUNI,t:"GTA 6 event until 30 Nov",d:"To celebrate the GTA 6 release, an event runs until 30 November. Tasks and quests now also give event coins, which you spend in the event shop."},
+  {i:BOXI,t:"Event boxes and mythic skins",d:"New event boxes with sunset, palm and night city skins. The rarest ones are mythic, with their own full-screen opening animation."},
+  {i:FLI,t:"New flames and backgrounds",d:"Animated event flames with glow and sparks, plus new backgrounds in a summer night vibe."},
+  {i:CLOUDI,t:"Progress saved to your account",d:"Your progress is now saved to your e-mail account, not only on this phone. Log in on another device with the same e-mail and PIN and your XP is there."},
+  {i:BELLI,t:"Task reminders",d:"On Android, FireUp can remind you of your tasks. Turn reminders on in Profile."},
+  {i:CROWNI,t:"Badge #1 GTA 6",d:"Adam was the first FireUp player to have GTA 6, so he got a one-of-a-kind badge. Tap it on the Leaderboard to see why."},
+  {i:SHIELDI,t:"Fair play",d:"Ticking off 10 or more tasks within 5 minutes now counts as cheating and gets your account banned."}],
   link:"iPhone link"},
- sk:{eyebrow:"BIG UPDATE",title:"Mince, boxy a skiny",ok:"Poďme na to",items:[
-  {i:LBI,t:"Rebríček je tu",d:"Záložka Rebríček je späť. Ty aj kamaráti sa vidíte s prezývkou, XP, levelom a ohňom, za tento týždeň aj celkovo. Prezývku si nastavíš hore v Rebríčku."},
-  {i:COINI,t:"Zbieraj mince",d:"Každá úloha dáva +10 mincí, perfektný deň +20, nový level +50 a questy až +150. Ako darček k Big update máš hneď 300 mincí."},
-  {i:BOXI,t:"Otváraj boxy",d:"V novej záložke Obchod je Bežný, Vzácny a Legendárny box. Z každého padne náhodný skin. Každá šanca je napísaná ako 1/N pre jeden konkrétny skin, napr. legendárny z Bežného boxu je 1/3000."},
-  {i:BRUSH,t:"Pozadia, farby a ikony",d:"17 pozadí, aj svetlé ako Biela, Mentolová či Pastelová a farebné ako Neónové mesto. K tomu farby appky a celé nové sady ikon ako Ručne kreslené alebo Pixel 8-bit. Ikony majú farbu podľa skinu Farba."},
-  {i:FLI,t:"Nové ohne",d:"Skiny ohňa majú vlastný tvar aj textúru: Duch, Plazma, Pekelný, Kráľovský, Kryštál, Pixelový, Prázdnota a Dúha. V Kolekcii ťukni na skin a nasadíš ho."},
-  {i:GLOBE,t:"Angličtina",d:"V Profile (vpravo hore) si teraz prepneš celú appku medzi slovenčinou a angličtinou."}],
+ sk:{eyebrow:"GTA 6 UPDATE",title:"GTA 6 event je tu",ok:"Poďme na to",items:[
+  {i:SUNI,t:"GTA 6 event do 30. 11.",d:"Na oslavu vydania GTA 6 beží event do 30. novembra. Úlohy a questy teraz dávajú aj event mince, ktoré minieš v event obchode."},
+  {i:BOXI,t:"Event boxy a mythic skiny",d:"Nové event boxy so skinmi západu slnka, paliem a nočného mesta. Najvzácnejšie sú mythic a majú vlastnú animáciu otvárania na celú obrazovku."},
+  {i:FLI,t:"Nové ohne a pozadia",d:"Animované event ohne so žiarou a iskrami a nové pozadia v štýle letnej noci."},
+  {i:CLOUDI,t:"Progres sa ukladá na účet",d:"Tvoj progres sa teraz ukladá k tvojmu e-mailu, nie len do mobilu. Na inom zariadení sa prihlásiš rovnakým e-mailom a PIN-om a XP tam máš."},
+  {i:BELLI,t:"Pripomienky úloh",d:"Na Androide ti FireUp pripomenie úlohy. Pripomienky zapneš v Profile."},
+  {i:CROWNI,t:"Odznak #1 GTA 6",d:"Adam mal GTA 6 ako prvý hráč FireUp, preto dostal odznak, ktorý má len on. Ťukni naň v Rebríčku a zistíš viac."},
+  {i:SHIELDI,t:"Férová hra",d:"Ak odškrtneš 10 a viac úloh do 5 minút, berie sa to ako podvod a účet dostane ban."}],
   link:"Odkaz pre iPhone"}};
 const IOS_URL="https://olmo4522.github.io/FRIEUP/";
 function showNews(manual){
@@ -1445,7 +1452,7 @@ function showNews(manual){
   $("#nwOk").onclick=()=>{SFX.tap();S.seenNews=NEWS_ID;save();closeLayer()};
   $("#scrim").onclick=ev=>{if(ev.target.id==="scrim"){S.seenNews=NEWS_ID;save();closeLayer()}};
 }
-function maybeNews(){if(S.seenNews===NEWS_ID)return;let n=0;const t=setInterval(()=>{n++;if(n>240){clearInterval(t);return}if(document.getElementById("gate")||$("#layer").innerHTML.trim())return;clearInterval(t);setTimeout(()=>{if(!$("#layer").innerHTML.trim()&&S.seenNews!==NEWS_ID)showNews(false)},500)},500)}
+function maybeNews(){if(S.seenNews===NEWS_ID)return;if(typeof EV_START==="number"&&Date.now()<EV_START){setTimeout(maybeNews,EV_START-Date.now()+1500);return}let n=0;const t=setInterval(()=>{n++;if(n>240){clearInterval(t);return}if(document.getElementById("gate")||$("#layer").innerHTML.trim())return;clearInterval(t);setTimeout(()=>{if(!$("#layer").innerHTML.trim()&&S.seenNews!==NEWS_ID)showNews(false)},500)},500)}
 function confirmSheet(title,text,okLbl,fn){
   SFX.open();$("#layer").innerHTML=`<div class="scrim" id="scrim"><div class="sheet" role="dialog" aria-modal="true"><h2>${title}</h2><p style="margin:0;color:var(--muted);line-height:1.5">${text}</p><div class="two"><button class="btn ghost" id="cNo">Zrušiť</button><button class="btn danger" id="cOk">${okLbl}</button></div></div></div>`;
   $("#cNo").onclick=closeLayer;$("#scrim").onclick=e=>{if(e.target.id==="scrim")closeLayer()};$("#cOk").onclick=()=>{$("#layer").innerHTML="";SFX.undo();fn()};
