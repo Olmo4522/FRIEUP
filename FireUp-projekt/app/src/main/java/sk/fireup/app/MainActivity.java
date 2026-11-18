@@ -136,6 +136,125 @@ public class MainActivity extends Activity {
             if (url == null || !url.startsWith("https://github.com/Olmo4522/FRIEUP/releases/")) return;
             runOnUiThread(() -> startDownload(url));
         }
+
+        @JavascriptInterface
+        public void setReminders(String json) {
+            Reminders.schedule(getApplicationContext(), json);
+        }
+
+        @JavascriptInterface
+        public boolean notifAllowed() {
+            if (Build.VERSION.SDK_INT >= 33 && checkSelfPermission("android.permission.POST_NOTIFICATIONS") != android.content.pm.PackageManager.PERMISSION_GRANTED) return false;
+            android.app.NotificationManager nm = (android.app.NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            return nm == null || nm.areNotificationsEnabled();
+        }
+
+        @JavascriptInterface
+        public void askNotif() {
+            runOnUiThread(() -> {
+                if (Build.VERSION.SDK_INT >= 33 && checkSelfPermission("android.permission.POST_NOTIFICATIONS") != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{"android.permission.POST_NOTIFICATIONS"}, 77);
+                } else if (!notifAllowed()) {
+                    try {
+                        Intent i = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+                        i.putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
+                        startActivity(i);
+                    } catch (Exception e) { }
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int code, String[] perms, int[] res) {
+        super.onRequestPermissionsResult(code, perms, res);
+        if (code == 77) js("window.__notifRefresh&&window.__notifRefresh()");
+    }
+
+    /* ---------- pripomienky k úlohám ---------- */
+    public static class Reminders {
+        static final String PREFS = "fireup_rem";
+        static final String CH = "fireup_tasks";
+
+        static void channel(Context c) {
+            android.app.NotificationManager nm = (android.app.NotificationManager) c.getSystemService(Context.NOTIFICATION_SERVICE);
+            if (nm != null && nm.getNotificationChannel(CH) == null) {
+                android.app.NotificationChannel ch = new android.app.NotificationChannel(CH, "Pripomienky úloh", android.app.NotificationManager.IMPORTANCE_HIGH);
+                ch.setDescription("Upozornenia na úlohy vo FireUp");
+                nm.createNotificationChannel(ch);
+            }
+        }
+
+        static android.app.PendingIntent pi(Context c, int id, String title, String body) {
+            Intent i = new Intent(c, ReminderReceiver.class);
+            i.setAction("sk.fireup.app.REMIND." + id);
+            i.putExtra("id", id);
+            i.putExtra("t", title);
+            i.putExtra("b", body);
+            return android.app.PendingIntent.getBroadcast(c, 9000 + id, i, android.app.PendingIntent.FLAG_UPDATE_CURRENT | android.app.PendingIntent.FLAG_IMMUTABLE);
+        }
+
+        static synchronized void schedule(Context c, String json) {
+            android.app.AlarmManager am = (android.app.AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
+            if (am == null) return;
+            android.content.SharedPreferences sp = c.getSharedPreferences(PREFS, Context.MODE_PRIVATE);
+            try {
+                org.json.JSONArray old = new org.json.JSONArray(sp.getString("plan", "[]"));
+                for (int k = 0; k < old.length(); k++) {
+                    org.json.JSONObject o = old.getJSONObject(k);
+                    am.cancel(pi(c, o.getInt("id"), o.optString("t"), o.optString("b")));
+                }
+            } catch (Exception e) { }
+            org.json.JSONArray plan;
+            try { plan = new org.json.JSONArray(json == null ? "[]" : json); } catch (Exception e) { plan = new org.json.JSONArray(); }
+            long now = System.currentTimeMillis();
+            boolean exact = Build.VERSION.SDK_INT < 31 || am.canScheduleExactAlarms();
+            for (int k = 0; k < plan.length(); k++) {
+                try {
+                    org.json.JSONObject o = plan.getJSONObject(k);
+                    long at = o.getLong("at");
+                    if (at <= now) continue;
+                    android.app.PendingIntent p = pi(c, o.getInt("id"), o.optString("t"), o.optString("b"));
+                    if (exact) am.setExactAndAllowWhileIdle(android.app.AlarmManager.RTC_WAKEUP, at, p);
+                    else am.setAndAllowWhileIdle(android.app.AlarmManager.RTC_WAKEUP, at, p);
+                } catch (Exception e) { }
+            }
+            sp.edit().putString("plan", plan.toString()).apply();
+        }
+    }
+
+    public static class ReminderReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context c, Intent i) {
+            try {
+                Reminders.channel(c);
+                Intent open = new Intent(c, MainActivity.class);
+                open.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                android.app.PendingIntent tap = android.app.PendingIntent.getActivity(c, 1, open, android.app.PendingIntent.FLAG_UPDATE_CURRENT | android.app.PendingIntent.FLAG_IMMUTABLE);
+                String body = i.getStringExtra("b");
+                android.app.Notification n = new android.app.Notification.Builder(c, Reminders.CH)
+                        .setSmallIcon(R.drawable.ic_flame)
+                        .setContentTitle(i.getStringExtra("t"))
+                        .setContentText(body)
+                        .setStyle(new android.app.Notification.BigTextStyle().bigText(body))
+                        .setColor(Color.parseColor("#3ee05a"))
+                        .setAutoCancel(true)
+                        .setContentIntent(tap)
+                        .build();
+                android.app.NotificationManager nm = (android.app.NotificationManager) c.getSystemService(Context.NOTIFICATION_SERVICE);
+                if (nm != null) nm.notify(i.getIntExtra("id", 0), n);
+            } catch (Exception e) { }
+        }
+    }
+
+    public static class BootReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context c, Intent i) {
+            String a = i.getAction();
+            if (Intent.ACTION_BOOT_COMPLETED.equals(a) || "android.intent.action.MY_PACKAGE_REPLACED".equals(a)) {
+                Reminders.schedule(c, c.getSharedPreferences(Reminders.PREFS, Context.MODE_PRIVATE).getString("plan", "[]"));
+            }
+        }
     }
 
     @Override

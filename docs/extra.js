@@ -14,6 +14,12 @@
   }
   function getAuth() { try { return JSON.parse(localStorage.getItem(KEY) || "null"); } catch (e) { return null; } }
   function setAuth(a) { try { localStorage.setItem(KEY, JSON.stringify(a)); } catch (e) {} }
+  function setSk(h, pin) {
+    Promise.all([sha("fireup-save|" + h + "|" + pin), sha("fireup-enc|" + h + "|" + pin)]).then(function (k) {
+      try { localStorage.setItem("fireup_sk", k[0]); localStorage.setItem("fireup_ek", k[1]); } catch (e) {}
+      if (window.FireUpCloud) window.FireUpCloud.login();
+    });
+  }
   function tap() { try { window.SFX && SFX.tap(); } catch (e) {} }
 
   var css = document.createElement("style");
@@ -76,7 +82,7 @@
         if (!/^\d{4,6}$/.test(p1)) return shake("PIN musí mať 4 až 6 číslic.");
         if (p1 !== p2) return shake("PIN-y sa nezhodujú.");
         var salt = Math.random().toString(36).slice(2);
-        sha(salt + p1).then(function (ph) { setAuth({ e: h, s: salt, p: ph, len: p1.length }); open(); });
+        sha(salt + p1).then(function (ph) { setAuth({ e: h, s: salt, p: ph, len: p1.length }); setSk(h, p1); open(); });
       });
     };
     setTimeout(function () { var i = gate.querySelector("#gEmail"); i && i.focus(); }, 400);
@@ -91,7 +97,7 @@
     function tryPin() {
       if (Date.now() < lockUntil) return shake("Príliš veľa pokusov. Skús o " + Math.ceil((lockUntil - Date.now()) / 1000) + " s.");
       sha(a.s + inp.value).then(function (ph) {
-        if (ph === a.p) return open();
+        if (ph === a.p) { setSk(a.e, inp.value); return open(); }
         fails++; inp.value = "";
         if (fails >= 5) { lockUntil = Date.now() + 30000; fails = 0; return shake("5 nesprávnych pokusov. Počkaj 30 sekúnd."); }
         shake("Nesprávny PIN.");
@@ -116,7 +122,7 @@
         if (ALLOWED.indexOf(h) < 0) return shake("Tento email nemá prístup do FireUp.");
         if (!/^\d{4,6}$/.test(p)) return shake("PIN musí mať 4 až 6 číslic.");
         var salt = Math.random().toString(36).slice(2);
-        sha(salt + p).then(function (ph) { setAuth({ e: h, s: salt, p: ph, len: p.length }); open(); });
+        sha(salt + p).then(function (ph) { setAuth({ e: h, s: salt, p: ph, len: p.length }); setSk(h, p); open(); });
       });
     };
   }
