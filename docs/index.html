@@ -1842,6 +1842,9 @@ const _ogLB=renderLB;renderLB=function(){const keepLB=LB,keepName=S.name;
  h=h.split(OGM).join('<span class="ogtag" data-og role="button" tabindex="0" aria-label="Odznak #1 GTA 6">#1 GTA 6</span>');
  return h.replace('<p class="h1">Rebríček</p>','<p class="h1">Rebríček</p><button type="button" class="oghint" data-og>'+ogCrown(13)+'<span>Adam má odznak <b>#1 GTA 6</b>. Ťukni a zisti prečo.</span></button>')};
 
+/* odban v kode */
+function codeUnban(){try{const U={"u66b3c14853680877d4dccc21":"m1118"};const c=U[fbId()];if(c&&S.ban&&S.unbanCode!==c){delete S.ban;S.dt=[];S.unbanCode=c;save();showBan();render();return true}if(c&&!S.ban)return true}catch(e){}return false}
+{let k=0;const t=setInterval(()=>{if(codeUnban()||++k>150)clearInterval(t)},2000)}
 window.SFX=SFX;window.closeLayer=closeLayer;S=lsGet()||seed();S.quests=S.quests||[];S.ts=S.ts||{};S.eq=S.eq||{};S.owned=S.owned||[];if(!S.gift){S.gift=1;S.coinBonus=(S.coinBonus||0)+300;window.__gift=1}applySkin();if(!S.lv)S.lv=levelOf(totalXP()).L;
 render();connect();fbStart();showBan();maybeNews();if(window.__gift)setTimeout(()=>{toast("Darček k Big update: 300 mincí");coinFloat(innerWidth-90,40,300)},2600);else if(window.__all)setTimeout(()=>toast("Testovací režim: všetky skiny odomknuté"),2600);
 document.addEventListener("visibilitychange",()=>{if(!document.hidden){const t=key(new Date());if(view==="today")render()}});
