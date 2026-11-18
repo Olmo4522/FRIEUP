@@ -999,7 +999,7 @@ async function fbPull(force){if(!fbOn)return;if(!force&&Date.now()-fbPullAt<4000
 async function fbUnban(){if(!S.ban)return;try{const r=await fetch(`https://firestore.googleapis.com/v1/projects/${FB.pid}/databases/(default)/documents/unban/${fbId()}?key=${FB.key}`);if(!r.ok)return;const j=await r.json();const at=+pv((j.fields||{}).at||{});if(at>(S.ban.at||0)){delete S.ban;S.dt=[];save();showBan();render()}}catch(e){}}
 function fbStart(){if(window.claude?.use)return;fbOn=true;fbUnban();fbPush();fbPull(true);setInterval(()=>{if(view==="lb"&&!document.hidden)fbPull(true)},10000);setInterval(()=>{if(!document.hidden)fbPush()},60000);document.addEventListener("visibilitychange",()=>{if(document.hidden)fbFlush();else{fbPush();if(view==="lb")fbPull(true)}});addEventListener("pagehide",fbFlush)}
 function lbPush(){fbPush();if(!myLb)return;const xp=totalXP();myLb.set({nick:(S.name||"Hráč").slice(0,30),xp,wxp:weekXP(),wk:monKey(key(new Date())),lv:levelOf(xp).L,streak:streak(),flame:(S.eq||{}).flame||"",at:Date.now()}).catch(()=>{})}
-const BIG_AT=Date.parse("2026-11-19T18:00:00+01:00");
+const BIG_AT=Date.parse("2026-11-18T20:00:00+01:00");
 const tasksOn=k=>{const d=fromKey(k);return S.tasks.filter(t=>t.days.includes(wd(d))&&t.from<=k&&(!t.week||monKey(k)===t.week))};
 const wkRange=mk=>{const a=fromKey(mk),b=addDays(a,6);return `${a.getDate()}.${a.getMonth()+1}. – ${b.getDate()}.${b.getMonth()+1}.`};
 const wkName=mk=>{const c=monKey(key(new Date()));if(mk===c)return"Tento týždeň";if(mk===key(addDays(fromKey(c),7)))return"Budúci týždeň";if(mk<c)return"Skončený týždeň";return"O "+Math.round((fromKey(mk)-fromKey(c))/6048e5)+" týždne"};
@@ -1126,7 +1126,7 @@ function renderToday(){
     if(done.length) list+=`<div class="sec"><h2>Splnené</h2><span>${done.length}</span></div><div class="list">${done.map(t=>taskCard(t,sel)).join("")}</div>`;
   }
   return `${header()}
-  ${Date.now()<BIG_AT&&!S.gtaMin?`<div class="bigupd" role="status"><span class="bu-ic"><i class="g6">6</i></span><span class="bu-t"><b>GTA 6 UPDATE</b><em>št 19. 11. · 18:00</em></span><span class="bu-cd" data-bu>${["d","h","m","s"].map(u=>`<span><b>--</b><small>${u}</small></span>`).join("")}</span><button type="button" class="bu-min" data-bumin aria-label="Stiahnuť na bok">${svg('<path d="M9 6l6 6-6 6"/>',2.4)}</button></div>`:""}
+  ${Date.now()<BIG_AT&&!S.gtaMin?`<div class="bigupd" role="status"><span class="bu-ic"><i class="g6">6</i></span><span class="bu-t"><b>GTA 6 UPDATE</b><em>st 18. 11. · 20:00</em></span><span class="bu-cd" data-bu>${["d","h","m","s"].map(u=>`<span><b>--</b><small>${u}</small></span>`).join("")}</span><button type="button" class="bu-min" data-bumin aria-label="Stiahnuť na bok">${svg('<path d="M9 6l6 6-6 6"/>',2.4)}</button></div>`:""}
   <div class="week">${wk}</div>
   <div class="level"><div class="flame">${flameSVG(lv.L)}</div><div class="meta"><div class="row"><span class="lv">LVL ${lv.L}</span><span class="tier">${TIERS[tierOf(lv.L)].name}</span><span class="xp">${xp} XP</span><span class="next">${lv.need-lv.into} XP do LVL ${lv.L+1}</span></div><div class="bar"><span data-k="lvl" data-w="${(lv.into/lv.need*100).toFixed(1)}"></span></div></div></div>
   <div class="stats"><div class="stat"><b>${s.done}/${s.total}</b><small>Úlohy</small></div><div class="stat"><b>${ico("flame")}${st}</b><small>Séria (dni)</small></div><div class="stat"><b>${s.total?Math.round(s.done/s.total*100):0}%</b><small>Úspešnosť</small></div></div>
@@ -1553,7 +1553,7 @@ window.__back=function(){if($("#layer").innerHTML.trim()){closeLayer();return tr
 /* ===== GTA 6 EVENT ===== */
 const EV_PALM="M31 80c1-18 0-32-3-44l3-1c3 12 4 27 3 45zM30 36c-6-8-17-10-27-6 9-1 18 2 24 8zm0 0c2-9 11-15 22-14-9 2-16 7-19 15zm0 0c-9-3-20 0-25 8 7-5 16-7 23-5zm0 0c8-4 19-3 26 4-8-3-17-4-24-1zm0 0c-1-8 3-17 10-21-5 6-7 13-7 21z";
 const EV_END=Date.parse("2026-11-30T23:59:59+01:00");
-const EV_START=Date.parse("2026-11-19T18:00:00+01:00"),EV_FROM="2026-11-19",EV_TO="2026-11-30";
+const EV_START=Date.parse("2026-11-18T20:00:00+01:00"),EV_FROM="2026-11-18",EV_TO="2026-11-30";
 const evActive=()=>{const n=Date.now();return n>=EV_START&&n<=EV_END};
 const EV_TASK=500,EV_PERFECT=1000,EV_QXP=15,EV_GIFT=1000;
 let evU=0;
