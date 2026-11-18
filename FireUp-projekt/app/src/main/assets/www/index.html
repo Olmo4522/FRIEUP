@@ -417,7 +417,7 @@ html.has-evbadge .btn:not(.ghost):not(.danger):not(.bx-buy)::before,html.has-evb
 html.lightsk #evbadgebg svg{opacity:.14}
 .evo{position:fixed;inset:0;z-index:90;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:radial-gradient(60% 45% at 50% 45%,color-mix(in srgb,var(--bc) 22%,transparent),transparent 70%),rgba(6,3,12,.9);opacity:0;transition:opacity .25s;overflow:hidden;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .evo.in{opacity:1}.evo.out{opacity:0}
-.evo-stage{position:relative;width:300px;height:320px;display:grid;place-items:center}
+.evo-stage{position:relative;width:min(300px,90vw);height:320px;display:grid;place-items:center}
 .evo-box{position:absolute;bottom:0;width:250px;z-index:3;transition:transform .5s cubic-bezier(.3,1.4,.5,1),opacity .5s}
 .evo-boxsvg{width:100%;overflow:visible}
 .evo-lid{transform-box:fill-box;transform-origin:30% 100%;transition:transform .55s cubic-bezier(.2,1.2,.4,1),opacity .55s}
@@ -694,7 +694,7 @@ svg.fl.t5{filter:drop-shadow(0 0 16px rgba(60,255,200,.55))}
 .fl-sparks{animation:sparks 2.2s ease-in-out infinite}
 @keyframes flick{0%,100%{transform:scale(1,1) skewX(0)}30%{transform:scale(.97,1.05) skewX(-2deg)}60%{transform:scale(1.02,.97) skewX(2deg)}}
 @keyframes sparks{0%,100%{opacity:.3;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
-.evo{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.evo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .ev{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 6px;border-radius:14px;background:var(--glass-2);border:1px solid var(--edge);text-align:center}
 .ev svg.fl{width:46px;height:46px}
 .ev b{font-size:13px}
@@ -1276,7 +1276,7 @@ function renderCh(){
     ["Level 10","Dosiahni LVL 10",lv,10,"money"]
   ];
   const curT=tierOf(lv);
-  const evo=`<div class="card"><h3>Evolúcia ohňa</h3><div class="evo">${TIERS.map((T,i)=>`<div class="ev${i<=curT?" got":""}${i===curT?" cur":""}">${flameSVG(T.from+(i===5?3:1))}<b>${T.name}</b><small>${i<=curT?(i===curT?"teraz":"odomknuté"):"LVL "+T.from}</small></div>`).join("")}</div></div>`;
+  const evo=`<div class="card"><h3>Evolúcia ohňa</h3><div class="evo-grid">${TIERS.map((T,i)=>`<div class="ev${i<=curT?" got":""}${i===curT?" cur":""}">${flameSVG(T.from+(i===5?3:1))}<b>${T.name}</b><small>${i<=curT?(i===curT?"teraz":"odomknuté"):"LVL "+T.from}</small></div>`).join("")}</div></div>`;
   const today=key(new Date()),dq=dailyQuests(today),wq=weeklyQuests(monKey(today));
   const qrow=q=>`<div class="qrow${q.done?" done":""}"><div class="ico">${ico(q.ic)}</div><div class="qm"><div class="row-between"><b>${q.n}</b><span class="xpb">+${q.xp} XP</span></div><small>${q.desc}</small><div class="qbar"><div class="bar"><span data-k="q${q.key}" data-w="${q.p/q.g*100}"></span></div><span class="qp">${q.done?"✓":q.p+"/"+q.g}</span></div></div></div>`;
   const my=(S.quests||[]).filter(q=>!q.done),fin=(S.quests||[]).filter(q=>q.done).sort((a,b)=>b.doneAt-a.doneAt);
