@@ -477,6 +477,38 @@ svg.evscenefl .evf-body{transform-origin:50% 95%;animation:evflick 1.6s ease-in-
 svg.evmythfl{filter:drop-shadow(0 0 10px rgba(255,47,143,.95)) drop-shadow(0 0 22px rgba(255,170,60,.6))}
 svg.evmythfl .evf-body{animation:evflick .9s ease-in-out infinite}
 @keyframes evflick{0%,100%{transform:scale(1,1) skewX(0)}25%{transform:scale(1.02,1.04) skewX(-1.5deg)}50%{transform:scale(.99,.98) skewX(1deg)}75%{transform:scale(1.01,1.03) skewX(-.5deg)}}
+.ogpill{display:inline-flex;align-items:center;gap:3px;padding:2px 7px 2px 4px;margin-left:6px;border-radius:999px;font:400 11px Anton,Impact,sans-serif;letter-spacing:.06em;color:#3a2200;background:linear-gradient(180deg,#fff1b0,#f5c542 45%,#d9931a);box-shadow:0 0 0 1px #ffe08a,0 0 12px -2px rgba(245,197,66,.8);position:relative;overflow:hidden;white-space:nowrap;vertical-align:middle;-webkit-text-fill-color:#3a2200;text-shadow:none}
+.ogpill.big{font-size:13px;padding:3px 10px 3px 6px;margin:0}
+.ogpill::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.75) 45%,transparent 60%);transform:translateX(-120%);animation:ogsh 2.6s ease-in-out infinite}
+@keyframes ogsh{60%,100%{transform:translateX(120%)}}
+.ogtag{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:999px;font:400 10px Anton,Impact,sans-serif;letter-spacing:.06em;color:#3a2200;-webkit-text-fill-color:#3a2200;background:linear-gradient(180deg,#fff1b0,#f5c542 45%,#d9931a);box-shadow:0 0 10px -2px rgba(245,197,66,.8);vertical-align:middle;cursor:pointer;white-space:nowrap}
+.ogprof{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px;border-radius:18px;text-align:center;background:linear-gradient(180deg,rgba(245,197,66,.16),var(--glass) 70%);border:1px solid rgba(245,197,66,.45)}
+.ogprof b{font-family:Anton,Impact,sans-serif;font-weight:400;font-size:22px;letter-spacing:.03em}.ogprof p{margin:0;font-size:12px;color:#ffe9a8}
+.gtacard{display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:18px;background:linear-gradient(180deg,rgba(255,94,158,.14),var(--glass) 60%);border:1px solid rgba(245,197,66,.45)}
+.gtah{font-family:Anton,Impact,sans-serif;font-size:20px;letter-spacing:.03em;color:#fff;text-shadow:2px 2px 0 #ff3d8b}
+.gtaxp{font:500 12px var(--f-mono);color:#ffd35a;white-space:nowrap}
+.gtasub{margin:0;font-size:12px;color:#ffc2de}
+.gtalist{display:flex;flex-direction:column;gap:6px}
+.gtat{display:flex;align-items:center;gap:10px;padding:10px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);text-align:left}
+.gtat.done{border-color:rgba(255,94,158,.5);background:rgba(255,94,158,.08)}.gtat.done .gtan{text-decoration:line-through;color:var(--muted)}
+.gtack{width:26px;height:26px;flex:none;border-radius:8px;border:1.5px solid #ff7ac0;display:grid;place-items:center;color:#2a0716}.gtack svg{width:16px;height:16px}
+.gtat.done .gtack{background:linear-gradient(180deg,#ffd35a,#ff7a3d 55%,#ff3d8b);border-color:transparent}
+.gtan{flex:1;font-size:14px;font-weight:600}
+.gtadel{width:24px;height:24px;display:grid;place-items:center;border-radius:6px;color:var(--muted);font-size:18px}
+.gtaadd{height:44px;border-radius:12px;font-weight:700;color:#2a0716;background:linear-gradient(180deg,#ffd35a,#ff7a3d 55%,#ff3d8b);box-shadow:0 3px 0 #8a1748}
+.gtaform{display:flex;flex-direction:column;gap:8px}.gtaform small{font:500 10px var(--f-mono);letter-spacing:.14em;color:var(--muted)}
+.gtachips{display:flex;flex-wrap:wrap;gap:6px}.gtachip{padding:6px 10px;border-radius:999px;border:1px solid rgba(255,122,192,.45);background:rgba(255,94,158,.08);color:#ffd6e8;font-size:12px}
+.gtaerr{margin:0;min-height:16px;font-size:13px;color:#ff6b6b}
+.ogrow{display:flex;justify-content:flex-end;margin:-6px 2px -4px}
+.ogpill.hdr{margin:0;padding:4px 11px 4px 8px;font-size:12px;gap:4px;background:linear-gradient(180deg,#ffffff,#fff3a6 35%,#ffd84a 70%,#ffb81f);box-shadow:0 0 0 1px #fff6c0,0 0 10px 0 rgba(255,215,80,.75);animation:oghdr 2.2s ease-in-out infinite}.ogpill.hdr svg{width:14px;height:14px}
+@keyframes oghdr{50%{box-shadow:0 0 0 1px #ffffff,0 0 14px 1px rgba(255,225,90,.95)}}
+.oginfo{align-items:center;text-align:center}.oginfo .ogim{display:grid;place-items:center;filter:drop-shadow(0 0 18px rgba(245,197,66,.6))}.oginfo h2{margin:4px 0 0}.oginfo p{margin:0;color:var(--muted);line-height:1.5}.oginfo p b{color:#ffe7a3}
+.ogpill[data-og]{cursor:pointer}
+.oghint{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:14px;text-align:left;font-size:13px;color:#ffe7a3;background:rgba(245,197,66,.1);border:1px solid rgba(245,197,66,.35)}.oghint svg path{fill:#f5c542}.oghint b{color:#fff3c4}
+.top{gap:8px}.top .tr{gap:6px;min-width:0}
+.top .coinchip{height:32px;gap:4px;padding:0 8px 0 5px}.top .coinchip svg{width:18px;height:18px}
+.top .snd{width:32px;height:32px;flex:none}
+@media (max-width:400px){.top .brand{font-size:16px;gap:6px}.top .brand svg{width:22px;height:22px}.top .tr{gap:4px}.top .coinchip{padding:0 6px 0 4px}.top .coinchip b{font-size:13px}}
 /* GTA 6 update banner */
 .bigupd{border:2px solid rgba(255,255,255,.9);border-radius:8px;box-shadow:0 0 0 1px rgba(0,0,0,.55),0 10px 30px -12px #ff5e9e}
 .bigupd::before{inset:0;z-index:-1;animation:none;opacity:1;border-radius:6px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 80'%3E%3Cpath fill='%23170a24' d='M31 80c1-18 0-32-3-44l3-1c3 12 4 27 3 45z'/%3E%3Cpath fill='%23170a24' d='M30 36c-6-8-17-10-27-6 9-1 18 2 24 8zm0 0c2-9 11-15 22-14-9 2-16 7-19 15zm0 0c-9-3-20 0-25 8 7-5 16-7 23-5zm0 0c8-4 19-3 26 4-8-3-17-4-24-1zm0 0c-1-8 3-17 10-21-5 6-7 13-7 21z'/%3E%3C/svg%3E") no-repeat right 100px bottom -8px/42px 58px,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 80'%3E%3Cpath fill='%23170a24' d='M31 80c1-18 0-32-3-44l3-1c3 12 4 27 3 45z'/%3E%3Cpath fill='%23170a24' d='M30 36c-6-8-17-10-27-6 9-1 18 2 24 8zm0 0c2-9 11-15 22-14-9 2-16 7-19 15zm0 0c-9-3-20 0-25 8 7-5 16-7 23-5zm0 0c8-4 19-3 26 4-8-3-17-4-24-1zm0 0c-1-8 3-17 10-21-5 6-7 13-7 21z'/%3E%3C/svg%3E") no-repeat right 134px bottom -14px/30px 44px}
@@ -1056,7 +1088,7 @@ function bestStreakAndPerfect(){let best=0,cur=0,perfect=0;const start=fromKey(e
 function totalDone(){let n=0;for(const k in S.log)for(const t of S.tasks)if(isDone(t,k))n++;return n}
 
 /* ---------- anti-cheat: 5 úloh za 3 minúty = permaban ---------- */
-const BAN_N=5,BAN_WIN=180000,BAN_LEN=86400000;
+const BAN_N=10,BAN_WIN=300000,BAN_LEN=86400000;
 function speedCheck(t,k){const n=Date.now();S.dt=(S.dt||[]).filter(e=>n-e.t<=BAN_WIN);S.dt.push({t:n,k,id:t.id});
   if(S.dt.length>=BAN_N){S.dt.forEach(e=>{const x=find(e.id);if(S.log[e.k]){S.log[e.k][e.id]=x&&x.type==="list"?[]:x&&x.type==="count"?0:false}if(S.ts[e.k])delete S.ts[e.k][e.id]});
     S.dt=[];S.ban={perm:1,at:n};S.xpCut=rawXP();S.spent=(S.spent||0)+coins();S.lv=levelOf(totalXP()).L;save();render();SFX.undo&&SFX.undo();buzz([60,40,60,40,120]);showBan();return true}
@@ -1715,7 +1747,7 @@ function evSection(){const c=evCoins(),own=new Set(ownedIds()),rk={rare:0,epic:1
  <div class="skgrid">${items.map(x=>{const o=own.has(x.id),eq=SK(x.cat).id===x.id;return `<button class="skin${o?"":" locked"}${eq?" eq":""}${x.r==="mythic"?" myth":""}" style="--rc:${RAR[x.r].c}" ${o?`data-equip="${x.id}"`:"disabled"}><span class="sk-prev">${skinPreview(x)}</span><b>${x.n}</b><small>${eq?"Nasadené":RAR[x.r].n}</small><em class="skodd">${(()=>{const v=EVBOXES.map(b=>evOdd(b,x.r)).filter(Boolean);return v.length?"1/"+Math.min(...v):"–"})()}</em></button>`}).join("")}</div>
  <p class="note" style="text-align:left;margin:0">Event skiny padajú len z event boxov a ostanú ti aj po evente. Každý 30. box bez legendárneho = legendárny isto. Duplikát vráti 25 %.</p></div>`}
 const _evRenderShop=renderShop;renderShop=function(){const h=_evRenderShop();return h.replace('<p class="h1">Obchod</p>','<p class="h1">Obchod</p>'+evSection())};
-const _evHeader=header;header=function(){if(!evActive())return _evHeader();return _evHeader().replace("</b></button>",`</b></button><button class="coinchip evchip" data-view="shop" aria-label="Event coiny">${evCoinSVG(18)}<b>${evCoins()}</b></button>`)};
+const _evHeader=header;header=function(){if(!evActive())return _evHeader();return _evHeader().replace("</b></button>",`</b></button><button class="coinchip evchip" data-view="shop" aria-label="Event coiny">${evCoinSVG(18)}<b>${(n=>n>=10000?(n/1000).toFixed(n<100000?1:0).replace(".0","")+"k":n)(evCoins())}</b></button>`)};
 
 /* ===== ULOZENIE PROGRESU DO UCTU (email + PIN) ===== */
 const CU=k=>`https://firestore.googleapis.com/v1/projects/${FB.pid}/databases/(default)/documents/saves/${k}?key=${FB.key}`;
@@ -1760,6 +1792,48 @@ document.addEventListener("click",async e=>{const b=e.target.closest("[data-noti
  save();setTimeout(()=>{ENTER=false;render()},600)});
 window.__notifRefresh=()=>{if(view==="prof"){ENTER=false;render()}remSync()};
 setTimeout(()=>{cloudPull();remSync()},900);
+
+/* ===== ADAM: #1 GTA 6 odznak + GTA 6 ulohy ===== */
+const ADAM_ID="u03939395fcb899d193dacc6e";const isAdam=()=>{try{return fbId()===ADAM_ID}catch(e){return false}};
+const GTA_PRE=["Dokonči misiu príbehu","Zarob 100 000 $ v hre","Kúp si nové auto","Vyhraj preteky","Preskúmaj novú časť mapy","Kúp si nehnuteľnosť","Uteč polícii s 3 hviezdami","Hraj 1 hodinu bez smrti"];
+const GTA_DIFF=[["Ľahká",30],["Stredná",60],["Ťažká",120]];
+const ogCrown=s=>`<svg viewBox="0 0 24 24" width="${s}" height="${s}" aria-hidden="true"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5Z" fill="#7a4a00"/></svg>`;
+const ogPill=(txt,big)=>`<span class="ogpill${big?" big":""}" data-og role="button" tabindex="0" aria-label="Čo je odznak #1 GTA 6">${ogCrown(big?14:11)}${txt}</span>`;
+function ogMedal(){return `<svg viewBox="0 0 100 100" width="86" height="86" aria-hidden="true"><defs><linearGradient id="ogmg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1b0"/><stop offset=".5" stop-color="#f5c542"/><stop offset="1" stop-color="#b8740e"/></linearGradient><linearGradient id="ogms" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a3ec8"/><stop offset=".5" stop-color="#ff5e9e"/><stop offset="1" stop-color="#ffb36b"/></linearGradient></defs><polygon points="50,4 61,14 76,12 80,27 93,35 88,50 93,65 80,73 76,88 61,86 50,96 39,86 24,88 20,73 7,65 12,50 7,35 20,27 24,12 39,14" fill="url(#ogmg)"/><circle cx="50" cy="50" r="30" fill="url(#ogms)" stroke="#fff3c4" stroke-width="3"/><path d="M33 44l8 7 9-12 9 12 8-7-3 16H36Z" fill="#ffe27a" stroke="#7a4a00" stroke-width="1.5"/><text x="50" y="76" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="13" fill="#fff">#1</text></svg>`}
+const gtaXP=()=>(S.gtaT||[]).filter(t=>t.d).reduce((a,t)=>a+t.x,0);
+const _ogTotal=totalXP;totalXP=function(){return _ogTotal()+(isAdam()?gtaXP():0)};
+let gtaForm=false,gtaX=30;
+function gtaCard(){const T=S.gtaT||[];
+ return `<div class="gtacard"><div class="row-between"><span class="gtah">GTA 6 úlohy</span><span class="gtaxp">${gtaXP()} XP</span></div>
+ <p class="gtasub">Len pre teba. Pridaj si, čo chceš v hre spraviť, a za splnenie dostaneš XP.</p>
+ <div class="gtalist">${T.length?T.map(t=>`<button type="button" class="gtat${t.d?" done":""}" data-gta="${t.id}"><span class="gtack">${t.d?svg('<path d="M5 12l5 5L20 7"/>',3):""}</span><span class="gtan">${esc(t.n)}</span><span class="gtaxp">+${t.x} XP</span><span class="gtadel" data-gtadel="${t.id}" aria-label="Zmazať">×</span></button>`).join(""):`<p class="gtasub" style="opacity:.7">Zatiaľ žiadne. Pridaj si prvú misiu.</p>`}</div>
+ ${gtaForm?`<div class="gtaform"><small>RÝCHLY VÝBER</small><div class="gtachips">${GTA_PRE.map(p=>`<button type="button" class="gtachip" data-gtapre="${esc(p)}">${esc(p)}</button>`).join("")}</div>
+ <small>ALEBO NAPÍŠ VLASTNÚ</small><input class="inp" id="gtaName" maxlength="60" placeholder="napr. Dokonči 3 misie príbehu">
+ <small>NÁROČNOSŤ</small><div class="seg">${GTA_DIFF.map(([n,x])=>`<button type="button" class="${x===gtaX?"on":""}" data-gtax="${x}">${n} · ${x} XP</button>`).join("")}</div>
+ <p class="gtaerr" id="gtaErr"></p><div class="two"><button type="button" class="btn ghost" data-gtacancel>Zrušiť</button><button type="button" class="btn" data-gtasave>Pridať</button></div></div>`:`<button type="button" class="gtaadd" data-gtaopen>+ Pridať GTA úlohu</button>`}</div>`}
+const _ogToday=renderToday;renderToday=function(){const h=_ogToday();if(!isAdam())return h;const i=h.indexOf('<div class="sec"');return i<0?h+gtaCard():h.slice(0,i)+gtaCard()+h.slice(i)};
+const _ogProf=renderProfile;renderProfile=function(){const h=_ogProf();if(!isAdam())return h;const card=`<div class="ogprof"><div>${ogMedal()}</div><b>${esc(S.name||"Adam")}</b>${ogPill("#1 GTA 6 HRÁČ",true)}<p>Prvý hráč GTA 6 vo FireUp. Tento odznak má len jeden človek.</p></div>`;const i=h.indexOf('<div class="card">');return i<0?h+card:h.slice(0,i)+card+h.slice(i)};
+const _ogHeader2=header;header=function(){const h=_ogHeader2();return isAdam()?h+'<div class="ogrow">'+ogPill("#1 GTA 6 HRÁČ").replace('class="ogpill"','class="ogpill hdr"')+'</div>':h};
+function gtaRerender(){ENTER=false;render()}
+document.addEventListener("click",e=>{const t=e.target;
+ const del=t.closest("[data-gtadel]");if(del){e.stopPropagation();S.gtaT=(S.gtaT||[]).filter(x=>x.id!==del.dataset.gtadel);save();SFX.tap();gtaRerender();return}
+ const it=t.closest("[data-gta]");if(it){const x=(S.gtaT||[]).find(y=>y.id===it.dataset.gta);if(x){x.d=!x.d;save();if(x.d){(SFX.quest||SFX.done)();const r=it.getBoundingClientRect();burst(r.left+20,r.top+r.height/2,30,false,["#ffd35a","#ff3d8b","#ffffff"]);toast("+"+x.x+" XP")}else SFX.tap();gtaRerender()}return}
+ if(t.closest("[data-gtaopen]")){SFX.tap();gtaForm=true;gtaRerender();setTimeout(()=>{const n=document.getElementById("gtaName");n&&n.focus()},50);return}
+ if(t.closest("[data-gtacancel]")){SFX.tap();gtaForm=false;gtaRerender();return}
+ const pre=t.closest("[data-gtapre]");if(pre){const n=document.getElementById("gtaName");if(n){n.value=pre.dataset.gtapre;const er=document.getElementById("gtaErr");if(er)er.textContent=""}return}
+ const gx=t.closest("[data-gtax]");if(gx){gtaX=+gx.dataset.gtax;document.querySelectorAll("[data-gtax]").forEach(b=>b.classList.toggle("on",b===gx));return}
+ if(t.closest("[data-gtasave]")){const n=document.getElementById("gtaName"),v=(n&&n.value||"").trim();if(!v){const er=document.getElementById("gtaErr");if(er)er.textContent="Napíš úlohu alebo vyber z rýchleho výberu.";return}
+  S.gtaT=[...(S.gtaT||[]),{id:"g"+Date.now().toString(36),n:v,x:gtaX,d:false}];gtaForm=false;save();SFX.save();gtaRerender()}});
+document.addEventListener("input",e=>{if(e.target.id==="gtaName"){const er=document.getElementById("gtaErr");if(er)er.textContent=""}});
+function ogInfo(){SFX.tap();$("#layer").innerHTML=`<div class="scrim" id="scrim"><div class="sheet oginfo" role="dialog" aria-modal="true" aria-label="Odznak #1 GTA 6"><div class="ogim">${ogMedal()}</div>${ogPill("#1 GTA 6 HRÁČ",true)}<h2>Prečo má Adam tento odznak?</h2><p>Adam bol <b>prvý zo všetkých hráčov FireUp, kto mal GTA 6</b>. Za to dostal tento odznak a má ho len on.</p><p class="note" style="margin:0">Odznak sa nedá kúpiť ani vyhrať v boxe.</p><button type="button" class="btn block" id="ogOk">Rozumiem</button></div></div>`;
+ $("#ogOk").onclick=()=>{SFX.tap();closeLayer()};$("#scrim").onclick=e=>{if(e.target.id==="scrim")closeLayer()}}
+document.addEventListener("click",e=>{if(e.target.closest("[data-og]")){e.preventDefault();ogInfo()}});
+const OGM="⁣";
+const _ogLB=renderLB;renderLB=function(){const keepLB=LB,keepName=S.name;
+ LB=LB.map(r=>r.id===ADAM_ID?Object.assign({},r,{nick:(r.nick||"Adam")+OGM}):r);if(isAdam())S.name=(S.name||"Adam")+OGM;
+ let h;try{h=_ogLB()}finally{LB=keepLB;S.name=keepName}
+ h=h.split(OGM).join('<span class="ogtag" data-og role="button" tabindex="0" aria-label="Odznak #1 GTA 6">#1 GTA 6</span>');
+ return h.replace('<p class="h1">Rebríček</p>','<p class="h1">Rebríček</p><button type="button" class="oghint" data-og>'+ogCrown(13)+'<span>Adam má odznak <b>#1 GTA 6</b>. Ťukni a zisti prečo.</span></button>')};
 
 window.SFX=SFX;window.closeLayer=closeLayer;S=lsGet()||seed();S.quests=S.quests||[];S.ts=S.ts||{};S.eq=S.eq||{};S.owned=S.owned||[];if(!S.gift){S.gift=1;S.coinBonus=(S.coinBonus||0)+300;window.__gift=1}applySkin();if(!S.lv)S.lv=levelOf(totalXP()).L;
 render();connect();fbStart();showBan();maybeNews();if(window.__gift)setTimeout(()=>{toast("Darček k Big update: 300 mincí");coinFloat(innerWidth-90,40,300)},2600);else if(window.__all)setTimeout(()=>toast("Testovací režim: všetky skiny odomknuté"),2600);
