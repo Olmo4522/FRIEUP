@@ -1237,12 +1237,12 @@ function renderLB(){const mode=window.__lbm||"w",cw=monKey(key(new Date())),xp=t
    const tag=r=>`${r.me?'<em>ty</em>':""}${r.demo?'<em class="dm">ukážka</em>':""}`;
    const pod=[1,0,2].filter(i=>rows[i]).map(i=>{const r=rows[i];return `<div class="pd p${i+1}${r.me?" me":""}${r.demo?" demo":""}" style="animation-delay:${[.12,0,.22][i]}s">
      ${i===0?`<span class="crown">${svg('<path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5Z"/>',1.8)}</span>`:""}
-     <span class="pdfl">${flameSVG(r.lv||1,"",r.flame||"")}</span><b class="pdn">${esc(r.nick||"Hráč")}</b><span class="pdtag">${tag(r)}</span>
+     <span class="pdfl">${flameSVG(r.lv||1,"",r.flame||"fl-green")}</span><b class="pdn">${esc(r.nick||"Hráč")}</b><span class="pdtag">${tag(r)}</span>
      <span class="pdx">${V(r)} <small>XP</small></span><span class="pdlv">LVL ${r.lv||1}</span>
      <div class="ped"><span>${i+1}</span></div></div>`}).join("");
    const gap=mi>0?V(rows[mi-1])-V(meR):0;
    const mine=`<div class="card lbme"><span class="lbme-rk">#${mi+1}</span><span class="lbme-t"><b>${mi===0?"Si na vrchole!":"Tvoje miesto"}</b><small>${mi===0?(rows[1]?`Náskok ${V(meR)-V(rows[1])} XP`:"Len tak ďalej"):`Do #${mi} ti chýba ${gap+1} XP`}</small></span><span class="lbme-x">${V(meR)}<small>XP</small></span></div>`;
-   const rest=rows.slice(3).map((r,j)=>`<div class="lbrow${r.me?" me":""}${r.demo?" demo":""}" style="animation-delay:${.3+j*.06}s"><span class="rk">${j+4}</span><span class="lbfl">${flameSVG(r.lv||1,"",r.flame||"")}</span><span class="lbm"><b>${esc(r.nick||"Hráč")}${r.me?' <em>ty</em>':""}${r.demo?' <em class="dm">ukážka</em>':""}</b><small>LVL ${r.lv||1} · séria ${r.streak||0} ${pl(r.streak||0,"deň","dni","dní")}</small><i class="lbbar"><i style="width:${Math.round(V(r)/top*100)}%"></i></i></span><span class="lbx"><b>${V(r)}</b><small>XP</small></span></div>`).join("");
+   const rest=rows.slice(3).map((r,j)=>`<div class="lbrow${r.me?" me":""}${r.demo?" demo":""}" style="animation-delay:${.3+j*.06}s"><span class="rk">${j+4}</span><span class="lbfl">${flameSVG(r.lv||1,"",r.flame||"fl-green")}</span><span class="lbm"><b>${esc(r.nick||"Hráč")}${r.me?' <em>ty</em>':""}${r.demo?' <em class="dm">ukážka</em>':""}</b><small>LVL ${r.lv||1} · séria ${r.streak||0} ${pl(r.streak||0,"deň","dni","dní")}</small><i class="lbbar"><i style="width:${Math.round(V(r)/top*100)}%"></i></i></span><span class="lbx"><b>${V(r)}</b><small>XP</small></span></div>`).join("");
    return `<div class="podium">${pod}</div>${mine}${rest?`<div class="lblist">${rest}</div>`:""}`})()}
   <p class="note" style="text-align:left;margin:0">${demo?"Riadky UKÁŽKA sú len na vyskúšanie. Kamaráti sa tu ukážu, keď si otvoria appku.":"Týždenný rebríček sa vynuluje každý pondelok."}</p>`}
 function renderStats(){
